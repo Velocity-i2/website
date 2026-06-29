@@ -46,15 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
   
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href && (currentPath.endsWith(href) || (currentPath === '/' && href === 'index.html'))) {
+    if (href && (currentPath.endsWith(href) || (currentPath === '/' && href === '/'))) {
       link.classList.add('active');
       matched = true;
     }
   });
   
-  // Fallback: If no match, check index.html default
+  // Fallback: If no match, check / default
   if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '')) {
-    const homeLink = document.querySelector('.nav-link[href="index.html"]');
+    const homeLink = document.querySelector('.nav-link[href="/"]');
     if (homeLink) homeLink.classList.add('active');
   }
 

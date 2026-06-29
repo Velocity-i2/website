@@ -49,7 +49,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(__dirname, '/'),
         about: resolve(__dirname, 'about.html'),
         services: resolve(__dirname, 'services.html'),
         pcbDesign: resolve(__dirname, 'pcb-design.html'),
