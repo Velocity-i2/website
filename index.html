@@ -170,7 +170,7 @@
         
         <div class="flex justify-between items-center reveal" style="margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <div class="badge badge-cyan">Active Feeds</div>
+            <div id="social-config-trigger" class="badge badge-cyan" style="cursor: pointer; user-select: none;">Active Feeds</div>
             <h2 style="margin-top: 0.5rem; margin-bottom: 0;">Social Proof Hub</h2>
           </div>
         </div>
@@ -271,13 +271,13 @@
               <div id="instagram-posts-container" class="grid grid-2 gap-2" style="max-height: 230px; overflow: hidden;">
                 <!-- Initial high-tech placeholder post cards -->
                 <div class="insta-post-card" style="position: relative; aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); background: rgba(15,23,42,0.1); cursor: pointer;">
-                  <img src="/01.png" alt="Hardware Prototype" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="public/01.png" alt="Hardware Prototype" style="width: 100%; height: 100%; object-fit: cover;" />
                   <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); padding: 0.5rem; font-size: 0.75rem; color: #fff; transform: translateY(0);" class="insta-caption-overlay">
                     Custom Controller Testing #lab
                   </div>
                 </div>
                 <div class="insta-post-card" style="position: relative; aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); background: rgba(15,23,42,0.1); cursor: pointer;">
-                  <img src="/01.png" alt="PCB Route" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="public/01.png" alt="PCB Route" style="width: 100%; height: 100%; object-fit: cover;" />
                   <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); padding: 0.5rem; font-size: 0.75rem; color: #fff; transform: translateY(0);" class="insta-caption-overlay">
                     High-speed differential routing #altium
                   </div>
@@ -285,10 +285,7 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-between" style="margin-top: 1.5rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
-              <span id="instagram-status" style="font-size: 0.8rem; color: var(--text-secondary); font-family: var(--font-mono);">
-                &gt; Feed synchronized automatically
-              </span>
+            <div class="flex items-center justify-end" style="margin-top: 1.5rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
               <a href="https://www.instagram.com/velocityi2/" target="_blank" class="btn btn-sm btn-outline-glow" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; height: 32px; display: flex; align-items: center; gap: 0.25rem;">
                 <i data-lucide="external-link" style="width: 12px; height: 12px;"></i> View Feed
               </a>
@@ -316,19 +313,19 @@
       </div>
     </section>
 
+    <!-- PREMIUM ENTERPRISE FOOTER -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-grid">
           
+          <!-- Column 1: Brand Info -->
           <div>
             <a href="index.html" class="logo-wrapper">
-              <img src="public/logo.png" alt="Velocity Logo" style="height: 44px;">
+              <img src="public/logo.png" alt="Velocity Logo" style="height: 44px;" />
             </a>
-
             <p class="footer-brand-desc">
               Velocity is an innovative embedded systems and electronics company dedicated to transforming ideas into reliable, intelligent, and scalable technology solutions.
             </p>
-
             <div class="footer-socials">
                 <a href="https://wa.me/919274524204" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
                     <img src="public/whatsapp.png" alt="WhatsApp" class="social-img">
@@ -350,7 +347,8 @@
                 </a>
             </div>
           </div>
-  
+          
+          <!-- Column 2: Engineering Services -->
           <div>
             <h4 class="footer-heading">Services</h4>
             <div class="footer-links">
@@ -362,6 +360,7 @@
             </div>
           </div>
 
+          <!-- Column 3: Corporate -->
           <div>
             <h4 class="footer-heading">Corporate</h4>
             <div class="footer-links">
@@ -373,6 +372,7 @@
             </div>
           </div>
 
+          <!-- Column 4: Contact / Address -->
           <div>
             <h4 class="footer-heading">Corporate HQ</h4>
             <div class="footer-links" style="gap: 1rem;">
@@ -397,6 +397,7 @@
 
         </div>
 
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
           <span class="copyright-text">
             &copy; 2026 Velocity - Igniting Innovation (Velocityi2). All rights reserved. Designed and developed in India.
@@ -409,7 +410,48 @@
       </div>
     </footer>
 
+    <!-- SOCIAL CONNECT CONFIGURATION MODAL -->
+    <div id="social-config-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
+      <div style="background: var(--bg-dark-surface); border: 1px solid rgba(29, 78, 216, 0.25); border-radius: var(--radius-lg); padding: 2.5rem; width: 100%; max-width: 500px; box-shadow: var(--shadow-glow); position: relative;">
+        
+        <button id="close-social-config-btn" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+
+        <div class="badge badge-cyan" style="margin-bottom: 0.75rem;">Account Setup</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">Connect Social Feeds</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Provide your Google Maps API Key &amp; Instagram Access Token to synchronize real-time reviews and posts.</p>
+        
+        <form id="social-config-form">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">Google Maps API Key</label>
+            <input type="password" class="form-control" id="config-google-api-key" placeholder="AIzaSy..." style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); background: rgba(15,23,42,0.6); border: 1px solid var(--border-light); color: var(--text-primary);">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">Google Place ID</label>
+            <input type="text" class="form-control" id="config-google-place-id" placeholder="ChIJ58gXCVSHXjkRE3moJOtVLHY" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); background: rgba(15,23,42,0.6); border: 1px solid var(--border-light); color: var(--text-primary);">
+            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 0.25rem;">Defaults to your configured Place ID.</span>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label" style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">Instagram Access Token</label>
+            <input type="password" class="form-control" id="config-insta-token" placeholder="IGQVJ..." style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); background: rgba(15,23,42,0.6); border: 1px solid var(--border-light); color: var(--text-primary);">
+            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 0.25rem;">Instagram Basic Display API token.</span>
+          </div>
+
+          <div class="flex gap-2" style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+            <button type="button" id="reset-social-config-btn" class="btn btn-secondary" style="flex: 1; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: transparent; color: var(--text-primary); cursor: pointer;">Clear Config</button>
+            <button type="submit" class="btn btn-primary" style="flex: 2; padding: 0.75rem; border-radius: var(--radius-md); background: var(--accent-cyan); color: #000; font-weight: 600; cursor: pointer; border: none;">Save &amp; Connect</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Core JS -->
     <script type="module" src="/assets/js/main.js"></script>
   </body>
 </html>
