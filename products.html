@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innovative Embedded &amp; IoT Products | Velocity - Igniting Innovation</title>
+    <meta name="description" content="Explore Velocity's professional hardware products including standalone Wi-Fi Timers, Wireless Water Level Controllers, IoT Temperature Loggers, and RS485 Data Transmitters." />
+    <link rel="icon" type="image/png" href="/public/fevicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/animations.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+  </head>
+  <body>
+
+    <!-- STICKY HEADER -->
+    <header id="site-header" class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo-wrapper">
+          <img src="/public/logo.png" alt="Velocity Logo" class="logo-img" />
+        </a>
+        
+        <nav id="nav-menu" class="nav-menu">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="industries.html" class="nav-link">Industries</a>
+          <a href="portfolio.html" class="nav-link">Portfolio</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="contact.html" class="btn btn-sm btn-primary hide-on-mobile">Book Consultation</a>
+        </nav>
+        
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- HEADER / HERO -->
+    <section class="section-padding" style="background: linear-gradient(180deg, rgba(29, 78, 216, 0.04) 0%, var(--bg-dark-base) 100%); padding-top: 140px; border-bottom: 1px solid var(--border-light);">
+      <div class="container text-center reveal">
+        <div class="badge badge-cyan">Off-the-shelf Hardware</div>
+        <h1 class="gradient-text" style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem;">Proprietary Product Platforms</h1>
+        <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+          We design and manufacture robust hardware modules to accelerate your field deployments, saving months of custom electronic design cycle.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRODUCTS CATALOG WITH FILTER -->
+    <section class="section-padding">
+      <div class="container">
+        
+        <!-- Filter Controls -->
+        <div class="flex justify-center gap-2 reveal" style="margin-bottom: 3.5rem; flex-wrap: wrap;">
+          <button class="btn btn-primary filter-btn" data-filter="all">All Products</button>
+          <button class="btn btn-secondary filter-btn" data-filter="timers">Automation Timers</button>
+          <button class="btn btn-secondary filter-btn" data-filter="controllers">Smart Controllers</button>
+          <button class="btn btn-secondary filter-btn" data-filter="telemetry">Telemetry &amp; Data</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-2 gap-4" id="products-dynamic-grid">
+          
+          <!-- Product 1: Wi-Fi Timer (Offline) -->
+          <div class="card-glow reveal-left product-filterable-card" data-category="timers">
+            <div class="badge badge-cyan">Automation Timers</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Timer - Standalone Offline</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">A high-precision programmable timer switch with built-in Wi-Fi access point, enabling scheduling and cycles without needing any internet connection.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Connectivity</span>
+                <span>Standalone Wi-Fi AP (Direct Hotspot)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Output Load</span>
+                <span>1 Heavy-Duty Relay (16A / 230V AC)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Hardware Clock</span>
+                <span>DS3231 Temperature-Compensated RTC</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Timer - Standalone Offline">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 2: Wi-Fi Timer (Online) -->
+          <div class="card-glow reveal-right product-filterable-card" data-category="timers">
+            <div class="badge badge-cyan">Automation Timers</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Timer - Internet Cloud Connected</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">An internet-enabled scheduling controller synchronizing with global NTP servers, supporting remote app scheduling and smart alerts via cloud dashboard.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Wireless Standard</span>
+                <span>2.4GHz Wi-Fi (NTP Server Sync)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Protocols</span>
+                <span>Secure MQTT / TLS / WebSockets</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Integration</span>
+                <span>Web Dashboard &amp; Mobile Responsive Control</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Timer - Internet Cloud Connected">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 3: Wi-Fi Cycling Timer -->
+          <div class="card-glow reveal-left product-filterable-card" data-category="timers">
+            <div class="badge badge-cyan">Automation Timers</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Cycling Timer Clock - Offline</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">An industrial interval cycling timer for automated pulse triggers and precision looping operations, easily configured via local Wi-Fi web portal.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Timer Modes</span>
+                <span>Cycle, Loop, Infinite Delay, Pulse-Trigger</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Precision</span>
+                <span>Millisecond-level execution accuracy</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Schedule Memory</span>
+                <span>Non-Volatile EEPROM (Saves state on power loss)</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Cycling Timer Clock - Offline">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 4: School Bell Timer -->
+          <div class="card-glow reveal-right product-filterable-card" data-category="timers">
+            <div class="badge badge-cyan">Automation Timers</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Base School Bell Timer</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">An automated bell scheduling system with built-in holiday planner, allowing standalone schedule management for institutions and factories.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Events Capacity</span>
+                <span>Up to 100 ring events/day with custom durations</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>RTC Stability</span>
+                <span>Battery-backed offline time sync (10-year life)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Control Relay</span>
+                <span>Dual isolated heavy-duty outputs</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Base School Bell Timer">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 5: Water Level Controller -->
+          <div class="card-glow reveal-left product-filterable-card" data-category="controllers">
+            <div class="badge badge-cyan">Smart Controllers</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wireless Water Level Controller</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">An intelligent automation system communicating wirelessly between ground tanks and overhead tanks across a solid 2-floor structure range.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Wireless Tech</span>
+                <span>Sub-GHz RF (Penetrates heavy RCC walls)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Fail-Safes</span>
+                <span>Dry run protection &amp; overhead overflow preventer</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Sensor Probes</span>
+                <span>Food-grade stainless steel magnetic sensors</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Wireless Water Level Controller">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 6: Temp Logger -->
+          <div class="card-glow reveal-right product-filterable-card" data-category="telemetry">
+            <div class="badge badge-cyan">Telemetry &amp; Data</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">IoT Base Temperature Logger</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">A continuous thermal monitoring logger pushing real-time measurements directly to Google Sheets with automated reports and email triggers.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Report Integration</span>
+                <span>Direct Google Sheets logging &amp; PDF reports generator</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Sensor Accuracy</span>
+                <span>DS18B20 digital probe (-55°C to +125°C, ±0.5°C)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Smart Alerts</span>
+                <span>Instant alarm triggers over Email / WhatsApp API</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="IoT Base Temperature Logger">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+          <!-- Product 7: Data Transmitter Pair -->
+          <div class="card-glow reveal-left product-filterable-card" data-category="telemetry">
+            <div class="badge badge-cyan">Telemetry &amp; Data</div>
+            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Long Range Data Transmitter Pair</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">A reliable plug-and-play transmitter pair communicating RS485 half-duplex packets wire-free over a solid 3-kilometer line-of-sight range.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Range Coverage</span>
+                <span>Up to 3.0 KM (Line-of-Sight, LoRa Modulation)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
+                <span>Interfaces</span>
+                <span>RS485 Half-Duplex In/Out (Modbus RTU fully transparent)</span>
+              </div>
+              <div class="flex justify-between" style="padding: 0.25rem 0;">
+                <span>Security</span>
+                <span>Hardware-level RF channel pairing &amp; packet check</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary request-datasheet-btn" data-product="Long Range Data Transmitter Pair">
+              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REQUEST DATASHEET MODAL (POPUP) -->
+    <div id="datasheet-modal" class="absolute h-full w-full" style="display: none; position: fixed; top: 0; left: 0; z-index: 2000; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1.5rem;">
+      <div style="background: var(--bg-dark-surface); border: 1px solid rgba(29, 78, 216, 0.15); border-radius: var(--radius-lg); padding: 2.5rem; width: 100%; max-width: 500px; box-shadow: var(--shadow-glow); position: relative;">
+        
+        <button id="close-modal-btn" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+          <i data-lucide="x"></i>
+        </button>
+
+        <div class="badge badge-cyan" style="margin-bottom: 0.75rem;">Download Access</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Request Technical Datasheet</h3>
+        
+        <!-- Datasheet Form -->
+        <form id="datasheet-request-form">
+          <div class="form-group">
+            <label class="form-label" for="modal-product-select">Product Platform</label>
+            <select class="form-control" id="modal-product-select" required>
+              <option value="Wi-Fi Timer - Standalone Offline">Wi-Fi Timer - Standalone Offline</option>
+              <option value="Wi-Fi Timer - Internet Cloud Connected">Wi-Fi Timer - Internet Cloud Connected</option>
+              <option value="Wi-Fi Cycling Timer Clock - Offline">Wi-Fi Cycling Timer Clock - Offline</option>
+              <option value="Wi-Fi Base School Bell Timer">Wi-Fi Base School Bell Timer</option>
+              <option value="Wireless Water Level Controller">Wireless Water Level Controller</option>
+              <option value="IoT Base Temperature Logger">IoT Base Temperature Logger</option>
+              <option value="Long Range Data Transmitter Pair">Long Range Data Transmitter Pair</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="modal-name">Your Name</label>
+            <input type="text" class="form-control" id="modal-name" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="modal-email">Corporate Email Address</label>
+            <input type="email" class="form-control" id="modal-email" placeholder="j.doe@company.com" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full">Download Datasheet</button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="datasheet-success-message" style="display: none; text-align: center; padding: 2rem 0;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(16,185,129,0.1); color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 1px solid rgba(16,185,129,0.2);">
+            <i data-lucide="check" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h4 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">Secure Access Granted</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Your secure download link has been dispatched to your corporate inbox.</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">&gt; SHA256-SIGN: SECURE_LINK_VALIDATED</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="logo-wrapper">
+              <img src="/public/logo.png" alt="Velocity Logo" style="height: 44px;" />
+            </a>
+            <p class="footer-brand-desc">
+              Velocity is an innovative embedded systems and electronics company dedicated to transforming ideas into reliable, intelligent, and scalable technology solutions.
+            </p>
+            <div class="footer-socials">
+                <a href="https://wa.me/919274524204" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+                    <img src="public/whatsapp.png" alt="WhatsApp" class="social-img">
+                </a>
+                <a href="https://github.com/Velocity-i2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                    <img src="public/github.png" alt="GitHub" class="social-img">
+                </a>
+                <a href="https://www.instagram.com/velocityi2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <img src="public/instagram.png" alt="Instagram" class="social-img">
+                </a>
+                <a href="https://www.linkedin.com/company/velocity-igniting-innovation" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                    <img src="public/linkdin.png" alt="LinkedIn" class="social-img">
+                </a>
+                <a href="https://www.youtube.com/@velocityi2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <img src="public/youtube.png" alt="YouTube" class="social-img">
+                </a>
+                <a href="https://share.google/dO0JNt6wWKF4vVy8C" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Google Reviews">
+                    <img src="public/review.png" alt="Google Reviews" class="social-img">
+                </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Services</h4>
+            <div class="footer-links">
+              <a href="services.html" class="footer-link">Services Overview</a>
+              <a href="pcb-design.html" class="footer-link">High-Speed PCB Design</a>
+              <a href="services.html#firmware" class="footer-link">Embedded Firmware</a>
+              <a href="services.html#iot" class="footer-link">IoT Solutions</a>
+              <a href="services.html#industrial" class="footer-link">Industrial Automation</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-heading">Corporate</h4>
+            <div class="footer-links">
+              <a href="about.html" class="footer-link">About Velocity</a>
+              <a href="portfolio.html" class="footer-link">Portfolio Case Studies</a>
+              <a href="blogs.html" class="footer-link">Engineering Blog</a>
+              <a href="careers.html" class="footer-link">Careers <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600; padding: 2px 6px; background: rgba(6, 182, 212, 0.15); border-radius: 4px; margin-left: 5px;">Hiring</span></a>
+              <a href="contact.html" class="footer-link">Contact Us</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-heading">Corporate HQ</h4>
+            <div class="footer-links" style="gap: 1rem;">
+              <div class="flex" style="gap: 0.75rem; align-items: flex-start;">
+                <i data-lucide="map-pin" style="color: var(--accent-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                <span style="font-size: 0.95rem; color: var(--text-secondary);">
+                  SF/3, Shivam Complex, nr. Rajhans cinema,
+                  New India Colony, Nikol,
+                  Ahmedabad, Gujarat - 380049, India
+                </span>
+              </div>
+              <div class="flex" style="gap: 0.75rem; align-items: center;">
+                <i data-lucide="mail" style="color: var(--accent-blue); width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <a href="mailto:info.velocityi2@gmail.com" class="footer-link" style="margin: 0;">info.velocityi2@gmail.com</a>
+              </div>
+              <div class="flex" style="gap: 0.75rem; align-items: center;">
+                <i data-lucide="phone" style="color: var(--accent-blue); width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <a href="tel:+919876543210" class="footer-link" style="margin: 0;">+91 92745 24204</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span class="copyright-text">
+            &copy; 2026 Velocity - Igniting Innovation (Velocityi2). All rights reserved. Designed and developed in India.
+          </span>
+          <div class="footer-bottom-links">
+            <a href="privacy-policy.html" class="footer-bottom-link">Privacy Policy</a>
+            <a href="terms-and-conditions.html" class="footer-bottom-link">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/assets/js/main.js"></script>
+  </body>
+</html>

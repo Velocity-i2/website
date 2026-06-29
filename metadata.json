@@ -1,0 +1,8 @@
+{
+  "name": "Velocity - Igniting Innovation",
+  "description": "Velocity - Igniting Innovation. Corporate website for embedded systems, electronics product development, PCB design, firmware development, IoT solutions, and industrial automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

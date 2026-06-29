@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Velocity Corporate Design System | Animations Stylesheet
+   ========================================================================== */
+
+/* --- CORE KEYFRAMES --- */
+
+/* Subtle floating effect for PCB and hardware images */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Dynamic breathing glow for the cybernetic elements */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.45);
+    border-color: rgba(6, 182, 212, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Slow rotation for circuit grids */
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Radial background gradient scanning */
+@keyframes bgScan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fade-in & Up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- ANIMATION UTILITY CLASSES --- */
+.anim-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.anim-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.anim-rotate-slow {
+  animation: rotateSlow 24s linear infinite;
+}
+
+/* Scroll Trigger Reveal Classes (managed by JS) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered Delay Helpers */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Hover Effect Utilities */
+.hover-glow {
+  transition: all var(--transition-normal);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(59, 130, 246, 0.4);
+}

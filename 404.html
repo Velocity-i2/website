@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - System Signal Interrupted | Velocity</title>
+    <meta name="description" content="The requested page could not be located on Velocity's corporate hardware portal. Return to the main schematic." />
+    <link rel="icon" type="image/png" href="/public/fevicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/animations.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+  </head>
+  <body>
+
+    <!-- MAIN ERROR BOX -->
+    <section class="section-padding" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(29, 78, 216, 0.06) 0%, var(--bg-dark-base) 80%);">
+      <div class="container text-center" style="max-width: 600px;">
+        
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(29, 78, 216, 0.08); color: var(--accent-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; border: 1px solid rgba(29, 78, 216, 0.15);" class="anim-pulse-glow">
+          <i data-lucide="alert-triangle" style="width: 38px; height: 38px;"></i>
+        </div>
+
+        <h1 class="gradient-text" style="font-size: 5rem; font-weight: 800; font-family: var(--font-mono); margin-bottom: 0.5rem; line-height: 1;">404</h1>
+        <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">System Signal Interrupted</h2>
+        
+        <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2.5rem;">
+          The route you requested does not map to any active hardware nodes or page configurations. The signal trace might have been broken or relocated.
+        </p>
+
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); background: rgba(15, 23, 42, 0.02); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-bottom: 2.5rem; text-align: left;">
+          &gt; ERROR_CODE: 0x404_PAGE_NOT_FOUND<br>
+          &gt; SYSTEM_STATUS: BUSY_SIGNAL_LOSS<br>
+          &gt; REQUEST_GATE: FAILED
+        </div>
+
+        <a href="index.html" class="btn btn-primary btn-lg">
+          <i data-lucide="home"></i> Return to Main Schematic
+        </a>
+
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/assets/js/main.js"></script>
+  </body>
+</html>

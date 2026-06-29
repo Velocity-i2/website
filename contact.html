@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Our Engineers | Velocity - Igniting Innovation</title>
+    <meta name="description" content="Reach Velocity - Igniting Innovation's principal hardware and firmware engineers. Send us your project requirements, coordinate NDAs, or book lab tours in Gandhinagar, Gujarat." />
+    <link rel="icon" type="image/png" href="/public/fevicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/animations.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+  </head>
+  <body>
+
+    <!-- STICKY HEADER -->
+    <header id="site-header" class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo-wrapper">
+          <img src="/public/logo.png" alt="Velocity Logo" class="logo-img" />
+        </a>
+        
+        <nav id="nav-menu" class="nav-menu">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="industries.html" class="nav-link">Industries</a>
+          <a href="portfolio.html" class="nav-link">Portfolio</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="contact.html" class="btn btn-sm btn-primary hide-on-mobile">Book Consultation</a>
+        </nav>
+        
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- HEADER / HERO -->
+    <section class="section-padding" style="background: linear-gradient(180deg, rgba(29, 78, 216, 0.04) 0%, var(--bg-dark-base) 100%); padding-top: 140px; border-bottom: 1px solid var(--border-light);">
+      <div class="container text-center reveal">
+        <div class="badge">Get In Touch</div>
+        <h1 class="gradient-text" style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem;">Let's Build the Future</h1>
+        <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+          Submit your product specifications, schedule an NDA, or book a technical consultation with our engineering directors.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT CONTAINER split -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="grid grid-2 gap-4">
+          
+          <!-- Left Column: Location and Contact Specs -->
+          <div class="reveal-left">
+            <h2>Velocity Engineering Office</h2>
+            <p style="margin-bottom: 2.5rem; max-width: 500px;">Our headquarters are located in the GIDC Electronics Zone corridor of Gandhinagar, Gujarat. Our lab is open for audits, schematic presentations, and prototype validations.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+              
+              <div class="flex" style="gap: 1rem; align-items: flex-start;">
+                <div class="card-icon-container" style="margin: 0; flex-shrink: 0;">
+                  <i data-lucide="map-pin"></i>
+                </div>
+                <div>
+                  <h4 style="margin: 0 0 0.25rem; font-size: 1.15rem;">Our Physical Address</h4>
+                  <p style="margin: 0; color: var(--text-secondary);">
+                    SF/3, Shivam Complex, nr. Rajhans cinema,
+                    New India Colony, Nikol,
+                    Ahmedabad, Gujarat - 380049, India
+                  </p>
+                </div>
+              </div>
+ 
+              <div class="flex" style="gap: 1rem; align-items: flex-start;">
+                <div class="card-icon-container" style="margin: 0; flex-shrink: 0;">
+                  <i data-lucide="mail"></i>
+                </div>
+                <div>
+                  <h4 style="margin: 0 0 0.25rem; font-size: 1.15rem;">Direct Inbox</h4>
+                  <p style="margin: 0; color: var(--text-secondary);">
+                    <a href="mailto:info.velocityi2@gmail.com" class="hover-glow" style="color: var(--accent-cyan);">info.velocityi2@gmail.com</a><br>
+                    <a href="mailto:rf.design@velocityi2.com" style="color: var(--text-secondary);">rf.design@velocityi2.com</a>
+                  </p>
+                </div>
+              </div>
+ 
+              <div class="flex" style="gap: 1rem; align-items: flex-start;">
+                <div class="card-icon-container" style="margin: 0; flex-shrink: 0;">
+                  <i data-lucide="phone"></i>
+                </div>
+                <div>
+                  <h4 style="margin: 0 0 0.25rem; font-size: 1.15rem;">Direct Hotline</h4>
+                  <p style="margin: 0; color: var(--text-secondary);">
+                    Office: +91 92745 24204<br>
+                    WhatsApp: +91 92745 24204
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Form -->
+          <div class="reveal-right">
+            <div style="background: var(--bg-dark-surface); border: 1px solid var(--border-light); padding: 3rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-subtle);">
+              
+              <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Initiate Your Project Brief</h3>
+              
+              <!-- Form Success feedback (hidden by default) -->
+              <div id="contact-success-alert" style="display: none; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(16,185,129,0.1); color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; border: 1px solid rgba(16,185,129,0.2);">
+                  <i data-lucide="check" style="width: 22px; height: 22px;"></i>
+                </div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">Project Brief Logged</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Our principal schematic architect will reach out within 1 business day.</p>
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">&gt; SECURE_HANDSHAKE: COMPLETE</span>
+              </div>
+
+              <!-- Main Contact Form -->
+              <form id="velocity-contact-form">
+                
+                <div class="form-group">
+                  <label class="form-label" for="contact-name">Your Name</label>
+                  <input type="text" class="form-control" id="contact-name" placeholder="John Doe" required>
+                </div>
+
+                <div class="grid grid-2 gap-2" style="margin-bottom: 0;">
+                  <div class="form-group">
+                    <label class="form-label" for="contact-email">Corporate Email</label>
+                    <input type="email" class="form-control" id="contact-email" placeholder="john@company.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="contact-phone" placeholder="+1 (555) 000-0000" required>
+                  </div>
+                </div>
+
+                <div class="grid grid-2 gap-2" style="margin-bottom: 0;">
+                  <div class="form-group">
+                    <label class="form-label" for="contact-company">Company / Institution</label>
+                    <input type="text" class="form-control" id="contact-company" placeholder="Acme Corp" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-domain">Engineering Domain</label>
+                    <select class="form-control" id="contact-domain" required>
+                      <option value="pcb-design">PCB Design &amp; Layout</option>
+                      <option value="embedded-firmware">Embedded Firmware (RTOS)</option>
+                      <option value="iot-edge">IoT Connected Systems</option>
+                      <option value="industrial">Industrial Telemetry &amp; Automation</option>
+                      <option value="full-product">Full Product (Schematics + Case)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="contact-message">Technical Requirements / Scope brief</label>
+                  <textarea class="form-control" id="contact-message" placeholder="Please outline board layers, microcontroller model, power specs, radio networks required..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">Transmit Project Specifications <i data-lucide="send" style="width: 14px;"></i></button>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="logo-wrapper">
+              <img src="/public/logo.png" alt="Velocity Logo" style="height: 44px;" />
+            </a>
+            <p class="footer-brand-desc">
+              Velocity is an innovative embedded systems and electronics company dedicated to transforming ideas into reliable, intelligent, and scalable technology solutions.
+            </p>
+            <div class="footer-socials">
+                <a href="https://wa.me/919274524204" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+                    <img src="public/whatsapp.png" alt="WhatsApp" class="social-img">
+                </a>
+                <a href="https://github.com/Velocity-i2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                    <img src="public/github.png" alt="GitHub" class="social-img">
+                </a>
+                <a href="https://www.instagram.com/velocityi2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <img src="public/instagram.png" alt="Instagram" class="social-img">
+                </a>
+                <a href="https://www.linkedin.com/company/velocity-igniting-innovation" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                    <img src="public/linkdin.png" alt="LinkedIn" class="social-img">
+                </a>
+                <a href="https://www.youtube.com/@velocityi2" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <img src="public/youtube.png" alt="YouTube" class="social-img">
+                </a>
+                <a href="https://share.google/dO0JNt6wWKF4vVy8C" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Google Reviews">
+                    <img src="public/review.png" alt="Google Reviews" class="social-img">
+                </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Services</h4>
+            <div class="footer-links">
+              <a href="services.html" class="footer-link">Services Overview</a>
+              <a href="pcb-design.html" class="footer-link">High-Speed PCB Design</a>
+              <a href="services.html#firmware" class="footer-link">Embedded Firmware</a>
+              <a href="services.html#iot" class="footer-link">IoT Solutions</a>
+              <a href="services.html#industrial" class="footer-link">Industrial Automation</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-heading">Corporate</h4>
+            <div class="footer-links">
+              <a href="about.html" class="footer-link">About Velocity</a>
+              <a href="portfolio.html" class="footer-link">Portfolio Case Studies</a>
+              <a href="blogs.html" class="footer-link">Engineering Blog</a>
+              <a href="careers.html" class="footer-link">Careers <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600; padding: 2px 6px; background: rgba(6, 182, 212, 0.15); border-radius: 4px; margin-left: 5px;">Hiring</span></a>
+              <a href="contact.html" class="footer-link">Contact Us</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-heading">Corporate HQ</h4>
+            <div class="footer-links" style="gap: 1rem;">
+              <div class="flex" style="gap: 0.75rem; align-items: flex-start;">
+                <i data-lucide="map-pin" style="color: var(--accent-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                <span style="font-size: 0.95rem; color: var(--text-secondary);">
+                  SF/3, Shivam Complex, nr. Rajhans cinema,
+                  New India Colony, Nikol,
+                  Ahmedabad, Gujarat - 380049, India
+                </span>
+              </div>
+              <div class="flex" style="gap: 0.75rem; align-items: center;">
+                <i data-lucide="mail" style="color: var(--accent-blue); width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <a href="mailto:info.velocityi2@gmail.com" class="footer-link" style="margin: 0;">info.velocityi2@gmail.com</a>
+              </div>
+              <div class="flex" style="gap: 0.75rem; align-items: center;">
+                <i data-lucide="phone" style="color: var(--accent-blue); width: 18px; height: 18px; flex-shrink: 0;"></i>
+                <a href="tel:+919876543210" class="footer-link" style="margin: 0;">+91 92745 24204</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span class="copyright-text">
+            &copy; 2026 Velocity - Igniting Innovation (Velocityi2). All rights reserved. Designed and developed in India.
+          </span>
+          <div class="footer-bottom-links">
+            <a href="privacy-policy.html" class="footer-bottom-link">Privacy Policy</a>
+            <a href="terms-and-conditions.html" class="footer-bottom-link">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/assets/js/main.js"></script>
+  </body>
+</html>
