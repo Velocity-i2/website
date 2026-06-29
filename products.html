@@ -16,13 +16,11 @@
   </head>
   <body>
 
-    <!-- STICKY HEADER -->
     <header id="site-header" class="site-header">
       <div class="container header-container">
         <a href="/" class="logo-wrapper">
           <img src="/public/logo.png" alt="Velocity Logo" class="logo-img" />
-        </a>
-        
+        </a>        
         <nav id="nav-menu" class="nav-menu">
           <a href="/" class="nav-link">Home</a>
           <a href="services.html" class="nav-link">Services</a>
@@ -32,21 +30,19 @@
           <a href="about.html" class="nav-link">About</a>
           <a href="contact.html" class="nav-link">Contact</a>
           <a href="contact.html" class="btn btn-sm btn-primary hide-on-mobile">Book Consultation</a>
-        </nav>
-        
+        </nav>        
         <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
           <i data-lucide="menu"></i>
         </button>
       </div>
     </header>
 
-    <!-- HEADER / HERO -->
     <section class="section-padding" style="background: linear-gradient(180deg, rgba(29, 78, 216, 0.04) 0%, var(--bg-dark-base) 100%); padding-top: 140px; border-bottom: 1px solid var(--border-light);">
       <div class="container text-center reveal">
-        <div class="badge badge-cyan">Off-the-shelf Hardware</div>
-        <h1 class="gradient-text" style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem;">Proprietary Product Platforms</h1>
-        <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
-          We design and manufacture robust hardware modules to accelerate your field deployments, saving months of custom electronic design cycle.
+        <!-- <div class="badge badge-cyan">Off-the-shelf Hardware</div> -->
+        <h1 class="gradient-text" style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem;">Innovative Embedded Products</h1>
+        <p style="font-size: 1.25rem; max-width: 850px; margin: 0 auto; color: var(--text-secondary);">
+          Explore our portfolio of proprietary embedded and IoT products, designed to deliver dependable performance, intelligent automation, and long-term reliability across a wide range of industries.
         </p>
       </div>
     </section>
@@ -65,196 +61,7 @@
 
         <!-- Products Grid -->
         <div class="grid grid-2 gap-4" id="products-dynamic-grid">
-          
-          <!-- Product 1: Wi-Fi Timer (Offline) -->
-          <div class="card-glow reveal-left product-filterable-card" data-category="timers">
-            <div class="badge badge-cyan">Automation Timers</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Timer - Standalone Offline</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">A high-precision programmable timer switch with built-in Wi-Fi access point, enabling scheduling and cycles without needing any internet connection.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Connectivity</span>
-                <span>Standalone Wi-Fi AP (Direct Hotspot)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Output Load</span>
-                <span>1 Heavy-Duty Relay (16A / 230V AC)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Hardware Clock</span>
-                <span>DS3231 Temperature-Compensated RTC</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Timer - Standalone Offline">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 2: Wi-Fi Timer (Online) -->
-          <div class="card-glow reveal-right product-filterable-card" data-category="timers">
-            <div class="badge badge-cyan">Automation Timers</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Timer - Internet Cloud Connected</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">An internet-enabled scheduling controller synchronizing with global NTP servers, supporting remote app scheduling and smart alerts via cloud dashboard.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Wireless Standard</span>
-                <span>2.4GHz Wi-Fi (NTP Server Sync)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Protocols</span>
-                <span>Secure MQTT / TLS / WebSockets</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Integration</span>
-                <span>Web Dashboard &amp; Mobile Responsive Control</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Timer - Internet Cloud Connected">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 3: Wi-Fi Cycling Timer -->
-          <div class="card-glow reveal-left product-filterable-card" data-category="timers">
-            <div class="badge badge-cyan">Automation Timers</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Cycling Timer Clock - Offline</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">An industrial interval cycling timer for automated pulse triggers and precision looping operations, easily configured via local Wi-Fi web portal.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Timer Modes</span>
-                <span>Cycle, Loop, Infinite Delay, Pulse-Trigger</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Precision</span>
-                <span>Millisecond-level execution accuracy</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Schedule Memory</span>
-                <span>Non-Volatile EEPROM (Saves state on power loss)</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Cycling Timer Clock - Offline">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 4: School Bell Timer -->
-          <div class="card-glow reveal-right product-filterable-card" data-category="timers">
-            <div class="badge badge-cyan">Automation Timers</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wi-Fi Base School Bell Timer</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">An automated bell scheduling system with built-in holiday planner, allowing standalone schedule management for institutions and factories.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Events Capacity</span>
-                <span>Up to 100 ring events/day with custom durations</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>RTC Stability</span>
-                <span>Battery-backed offline time sync (10-year life)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Control Relay</span>
-                <span>Dual isolated heavy-duty outputs</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Wi-Fi Base School Bell Timer">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 5: Water Level Controller -->
-          <div class="card-glow reveal-left product-filterable-card" data-category="controllers">
-            <div class="badge badge-cyan">Smart Controllers</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Wireless Water Level Controller</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">An intelligent automation system communicating wirelessly between ground tanks and overhead tanks across a solid 2-floor structure range.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Wireless Tech</span>
-                <span>Sub-GHz RF (Penetrates heavy RCC walls)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Fail-Safes</span>
-                <span>Dry run protection &amp; overhead overflow preventer</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Sensor Probes</span>
-                <span>Food-grade stainless steel magnetic sensors</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Wireless Water Level Controller">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 6: Temp Logger -->
-          <div class="card-glow reveal-right product-filterable-card" data-category="telemetry">
-            <div class="badge badge-cyan">Telemetry &amp; Data</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">IoT Base Temperature Logger</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">A continuous thermal monitoring logger pushing real-time measurements directly to Google Sheets with automated reports and email triggers.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Report Integration</span>
-                <span>Direct Google Sheets logging &amp; PDF reports generator</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Sensor Accuracy</span>
-                <span>DS18B20 digital probe (-55°C to +125°C, ±0.5°C)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Smart Alerts</span>
-                <span>Instant alarm triggers over Email / WhatsApp API</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="IoT Base Temperature Logger">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
-          <!-- Product 7: Data Transmitter Pair -->
-          <div class="card-glow reveal-left product-filterable-card" data-category="telemetry">
-            <div class="badge badge-cyan">Telemetry &amp; Data</div>
-            <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">Long Range Data Transmitter Pair</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">A reliable plug-and-play transmitter pair communicating RS485 half-duplex packets wire-free over a solid 3-kilometer line-of-sight range.</p>
-            
-            <div style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <span style="color: var(--accent-blue); display: block; margin-bottom: 0.5rem;">[KEY SPECIFICATIONS]</span>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Range Coverage</span>
-                <span>Up to 3.0 KM (Line-of-Sight, LoRa Modulation)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0; border-bottom: 1px dashed rgba(15, 23, 42, 0.08);">
-                <span>Interfaces</span>
-                <span>RS485 Half-Duplex In/Out (Modbus RTU fully transparent)</span>
-              </div>
-              <div class="flex justify-between" style="padding: 0.25rem 0;">
-                <span>Security</span>
-                <span>Hardware-level RF channel pairing &amp; packet check</span>
-              </div>
-            </div>
-
-            <button class="btn btn-primary request-datasheet-btn" data-product="Long Range Data Transmitter Pair">
-              Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-            </button>
-          </div>
-
+                 
         </div>
 
       </div>

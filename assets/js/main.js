@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.nav-link');
   let matched = false;
-  
+
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href && (currentPath.endsWith(href) || (currentPath === '/' && href === '/'))) {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       matched = true;
     }
   });
-  
+
   // Fallback: If no match, check / default
   if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '')) {
     const homeLink = document.querySelector('.nav-link[href="/"]');
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(6, 182, 212, ${alpha})`;
         ctx.fill();
-        
+
         // Draw a soft outer halo
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Loop
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      
+
       // Draw grids briefly
       ctx.strokeStyle = 'rgba(15, 23, 42, 0.03)';
       ctx.lineWidth = 1;
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = `rgba(29, 78, 216, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
-            
+
             // Draw clean 90 degree "electronics PCB style" path instead of straight lines sometimes
             if (i % 3 === 0) {
               const midX = (nodes[i].x + nodes[j].x) / 2;
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm && successAlert) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
+
       // Show an elegant sending spinner / disable button
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
@@ -223,12 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn.innerHTML = originalText;
           submitBtn.removeAttribute('disabled');
         }
-        
+
         // Reveal success feedback
         contactForm.reset();
         successAlert.style.display = 'block';
         successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
+
         // Hide feedback after 8 seconds
         setTimeout(() => {
           successAlert.style.display = 'none';
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsGrid = document.getElementById('products-dynamic-grid');
   if (productsGrid && typeof products !== 'undefined') {
     productsGrid.innerHTML = '';
-    
+
     products.forEach((product, index) => {
       const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
       const card = document.createElement('div');
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.display = 'block';
       card.style.opacity = '1';
       card.style.transform = 'scale(1)';
-      
+
       let specsHTML = '';
       if (product.specs) {
         specsHTML = `
@@ -267,11 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const imageHTML = product.image ? `
-        <div class="product-image-container" style="width: 100%; height: 220px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 1.5rem; transition: all 0.3s ease; position: relative; background: rgba(15,23,42,0.15);">
-          <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" referrerPolicy="no-referrer" />
-        </div>
-      ` : '';
-
+          <div class="product-image-container" style=" width:350px; height:350px; margin:0 auto 1.5rem; display:flex; justify-content:center; align-items:center; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-light); background:rgba(15,23,42,0.15);">
+            <img src="${product.image}" alt="${product.name}" style=" width:100%; height:100%; object-fit:contain; object-position:center center; display:block; " referrerpolicy="no-referrer">
+          </div>
+        ` : '';
       card.innerHTML = `
         <div class="badge badge-cyan">${product.badge}</div>
         ${imageHTML}
@@ -337,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('close-modal-btn');
   const datasheetForm = document.getElementById('datasheet-request-form');
   const datasheetSuccess = document.getElementById('datasheet-success-message');
-  
+
   if (datasheetModal) {
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.request-datasheet-btn');
@@ -374,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (datasheetForm) {
       datasheetForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const submitBtn = datasheetForm.querySelector('button[type="submit"]');
         if (submitBtn) {
           submitBtn.innerHTML = 'Generating secure link...';
@@ -511,22 +510,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render Reviews Slider
   function renderReviews(reviewsList) {
     if (!reviewsViewport) return;
-    
+
     totalReviews = reviewsList.length;
     currentReviewIndex = 0;
-    
+
     reviewsViewport.innerHTML = '';
     reviewsList.forEach(rev => {
       const slide = document.createElement('div');
       slide.className = 'review-slide';
       slide.style.cssText = 'width: 100%; max-width: 100%; min-width: 100%; flex-shrink: 0; padding-right: 1.25rem; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box;';
-      
+
       const initials = rev.initials || getInitials(rev.author_name);
       // Automatically adjust font size and line height based on character length so it never overflows!
       const charCount = rev.text.length;
       let fontSize = '0.95rem';
       let lineHeight = '1.6';
-      
+
       if (charCount > 250) {
         fontSize = '0.82rem';
         lineHeight = '1.45';
@@ -534,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fontSize = '0.88rem';
         lineHeight = '1.5';
       }
-      
+
       slide.innerHTML = `
         <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
           "${rev.text}"
@@ -625,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
       postCard.target = '_blank';
       postCard.className = 'insta-post-card';
       postCard.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); background: rgba(15,23,42,0.1); cursor: pointer; display: block;';
-      
+
       postCard.innerHTML = `
         <img src="${post.media_url}" alt="Instagram post" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);" referrerPolicy="no-referrer" />
         <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); padding: 0.75rem; font-size: 0.75rem; color: #fff; transform: translateY(100%); opacity: 0; transition: all 0.3s ease;" class="insta-caption-overlay">

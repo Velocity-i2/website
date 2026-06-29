@@ -16,13 +16,11 @@
   </head>
   <body>
 
-    <!-- STICKY HEADER -->
     <header id="site-header" class="site-header">
       <div class="container header-container">
         <a href="/" class="logo-wrapper">
           <img src="/public/logo.png" alt="Velocity Logo" class="logo-img" />
         </a>
-        
         <nav id="nav-menu" class="nav-menu">
           <a href="/" class="nav-link">Home</a>
           <a href="services.html" class="nav-link">Services</a>
@@ -32,169 +30,165 @@
           <a href="about.html" class="nav-link">About</a>
           <a href="contact.html" class="nav-link">Contact</a>
           <a href="contact.html" class="btn btn-sm btn-primary hide-on-mobile">Book Consultation</a>
-        </nav>
-        
+        </nav>        
         <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
           <i data-lucide="menu"></i>
         </button>
       </div>
     </header>
 
-    <!-- HEADER / HERO -->
     <section class="section-padding" style="background: linear-gradient(180deg, rgba(29, 78, 216, 0.04) 0%, var(--bg-dark-base) 100%); padding-top: 140px; border-bottom: 1px solid var(--border-light);">
       <div class="container text-center reveal">
-        <div class="badge">Capabilities</div>
+        <!-- <div class="badge">Capabilities</div> -->
         <h1 class="gradient-text" style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem;">Core Engineering Services</h1>
-        <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+        <p style="font-size: 1.25rem; max-width: 850px; margin: 0 auto; color: var(--text-secondary);">
           We deliver complete full-stack electronics product engineering, providing our global clients with a singular point of accountability from schematics to high-volume shipping.
         </p>
       </div>
     </section>
 
-    <!-- SERVICES LIST GRID -->
     <section class="section-padding">
       <div class="container">
-        <div class="grid grid-2 gap-4">
-          
-          <!-- Service 1: PCB Design -->
+        <div class="grid grid-2 gap-4">          
           <div class="card-glow reveal-left" id="pcb">
             <div class="card-icon-container" style="background: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.2);">
               <i data-lucide="layers"></i>
             </div>
-            <h3>High-Speed &amp; RF PCB Design</h3>
+            <h3>PCB Design &amp; Layout</h3>
+            <h4>Precision, Performance & Reliability</h4>
             <span class="badge badge-cyan" style="position: absolute; top: 25px; right: 25px; margin: 0;">Specialized</span>
-            <p>Laying out complex, multi-layer high-frequency circuit boards. We manage strict physical and electromagnetic rulesets, impedance targets, and signal trace routing bounds.</p>
+            <p>Designing high-quality multilayer PCBs with optimized routing, manufacturability, and signal performance for reliable products.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Up to 32 Layers High-Speed Impedance Control</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Blind &amp; Buried Microvia stackups, Rigid-Flex Layouts</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Signal Integrity (SI) &amp; Power Integrity (PI) Simulations</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> High-Speed & Controlled Impedance Routing</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> DFM, DFA & Gerber Generation</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Signal Integrity (SI) &amp; Power Integrity (PI)</li>
             </ul>
             <a href="pcb-design.html" class="btn btn-sm btn-primary w-full">View PCB Layout Details <i data-lucide="arrow-right" style="width: 14px;"></i></a>
           </div>
 
-          <!-- Service 2: Embedded System Design -->
           <div class="card-glow reveal-right" id="embedded">
             <div class="card-icon-container">
               <i data-lucide="cpu"></i>
             </div>
             <h3>Embedded System Design</h3>
-            <p>Our hardware engineering team defines robust component architectures, maps power distribution networks, and designs full schematics with a focus on reliability.</p>
+            <h4>Intelligent Hardware Architecture</h4>
+            <p>We design robust embedded systems with optimized hardware architecture, efficient power management, and reliable circuit design for industrial, IoT, and consumer electronics applications.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Microcontroller &amp; SoC Selection (ARM Cortex, RISC-V, ESP32)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Precision Analog Front-End (AFE) Signal Conditioning</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Low-Power Rail Optimization &amp; LDO/Buck Cascades</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Microcontroller &amp; Processor Selection (ESP32, STM32, ARM Cortex, Raspberry Pi)</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Schematic Design, Power Distribution & Signal Integrity Optimization</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Low-Power Design, Sensor Integration & Hardware Validation</li>
             </ul>
           </div>
 
-          <!-- Service 3: Firmware Development -->
           <div class="card-glow reveal-left" id="firmware">
             <div class="card-icon-container">
               <i data-lucide="binary"></i>
             </div>
             <h3>Firmware Development</h3>
-            <p>We write elegant, highly-optimized C/C++ firmware to make your hardware perform reliably. Our code runs bare-metal or on Real-Time Operating Systems (RTOS).</p>
+            <h4>Reliable, Efficient & Performance-Optimized</h4>
+            <p>We develop robust embedded firmware that ensures stable, secure, and high-performance operation across industrial, IoT, and custom electronic devices. Our firmware is optimized for reliability, low power consumption, and real-time performance.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Real-Time Operating Systems (FreeRTOS, Zephyr RTOS)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Custom Driver Implementation (SPI, I2C, UART, CAN, USB)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Sleep State Optimization &amp; Ultra-Low Standby Current</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Embedded C/C++ Development for ESP32, STM32, ARM Cortex & Arduino</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Real-Time Operating Systems (FreeRTOS) & Bare-Metal Firmware</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Custom Driver Development, Communication Protocols (UART, SPI, I2C, CAN, RS485, Modbus) &amp; OTA Firmware Updates</li>
             </ul>
           </div>
 
-          <!-- Service 4: IoT Development -->
           <div class="card-glow reveal-right" id="iot">
             <div class="card-icon-container">
               <i data-lucide="wifi"></i>
             </div>
             <h3>IoT Solutions &amp; Connected Devices</h3>
-            <p>We deploy robust edge communication capabilities, connecting low-power remote sensors securely to public or private cloud telemetry architectures.</p>
+            <h4>Smart, Secure & Scalable Connectivity</h4>
+            <p>We develop end-to-end IoT solutions that seamlessly connect embedded devices to cloud platforms, enabling real-time monitoring, remote control, automation, and intelligent data analytics for industrial and commercial applications.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Cellular IoT (LTE-M, NB-IoT), Wi-Fi 6, Bluetooth 5.4, LoRaWAN</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Secure Cloud Integration (MQTT, WebSockets, HTTPS to AWS/Azure)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Secure Bootloaders &amp; Firmware Over-the-Air (FOTA) Updates</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> IoT Device Development with Wi-Fi, Bluetooth (BLE), LoRa, GSM & MQTT Connectivity</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Secure Cloud Integration with Firebase, AWS, Google Cloud & Real-Time Dashboards</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Remote Monitoring, OTA Firmware Updates, Data Logging & Smart Automation Solutions</li>
             </ul>
           </div>
 
-          <!-- Service 5: Product Development -->
           <div class="card-glow reveal-left" id="product">
             <div class="card-icon-container">
               <i data-lucide="box"></i>
             </div>
             <h3>End-to-End Product Development</h3>
-            <p>We provide comprehensive concept-to-market product engineering, coordinating hardware, software, casing layout, and system validation.</p>
+            <h4>From Concept to Production</h4>
+            <p>We transform innovative ideas into market-ready electronic products by providing complete product development services, including hardware design, firmware development, PCB design, prototyping, testing, and manufacturing support.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Enclosure Fitting &amp; Mechanical Layout Coordination (3D CAD)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Ingress Protection (IP65/IP67) thermal and stress planning</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Bill of Materials (BOM) cost optimization &amp; sourcing plans</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Complete Hardware, PCB, Firmware &amp; IoT Product Development</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Prototype Design, Testing, Validation & Production-Ready Documentation</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Manufacturing Support, BOM Optimization &amp; End-to-End Engineering Solutions</li>
             </ul>
           </div>
 
-          <!-- Service 6: Prototype Manufacturing -->
           <div class="card-glow reveal-right" id="prototype">
             <div class="card-icon-container">
               <i data-lucide="wrench"></i>
             </div>
             <h3>Prototype Manufacturing Support</h3>
-            <p>We eliminate friction when stepping up to initial bench prototypes, validating schematics and debugging hardware systems in our laboratory.</p>
+            <h4>Rapid Prototyping & Production Readiness</h4>
+            <p>We accelerate product development by supporting rapid prototype manufacturing, hardware validation, and production preparation, ensuring every design is thoroughly tested before mass production.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Desktop Assembly and Quick-Turn Board Sourcing</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Hardware Debugging &amp; Signal Oscilloscope Verification</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Lab testing of power ripples, clock skew, and logic states</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Rapid PCB Prototyping & Assembly Support</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Hardware Debugging, Signal Analysis & Oscilloscope Verification</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Functional Testing, Product Validation & Manufacturing Readiness</li>
             </ul>
           </div>
 
-          <!-- Service 7: Reverse Engineering -->
           <div class="card-glow reveal-left" id="reverse">
             <div class="card-icon-container">
               <i data-lucide="refresh-cw"></i>
             </div>
             <h3>Reverse Engineering</h3>
-            <p>We perform systematic teardowns, extract schematics from legacy multi-layer PCBs, upgrade obsolete parts, and enhance existing designs.</p>
+            <h4>Analyze, Upgrade & Redesign</h4>
+            <p>We reverse engineer existing electronic products to understand their design, improve functionality, replace obsolete components, and develop enhanced, manufacturing-ready solutions.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> PCB Layer Delamination &amp; Trace Extraction</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Obsolescence redesign with direct drop-in modern alternatives</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Schematic reconstruction &amp; feature additions</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> PCB Analysis, Circuit Tracing & Schematic Reconstruction</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Legacy Hardware Upgrades & Component Replacement</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Design Enhancement, Feature Integration & Product Optimization</li>
             </ul>
           </div>
 
-          <!-- Service 8: Industrial Automation -->
           <div class="card-glow reveal-right" id="industrial">
             <div class="card-icon-container">
               <i data-lucide="shield-check"></i>
             </div>
             <h3>Industrial Automation</h3>
-            <p>We design custom rugged electronic boards capable of withstanding harsh, high-vibration, high-EMI, and extreme temperature industrial fields.</p>
+            <h4>Smart, Reliable & Industrial-Grade Solutions</h4>
+            <p>We develop robust industrial automation systems that improve operational efficiency, enable real-time monitoring, and deliver reliable performance in demanding industrial environments.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> High Galvanic Isolation (Optocouplers, Magnetic Isolators)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Industrial Protocol Interfaces (RS485 Modbus, CAN Bus, EtherCAT)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Transient Voltage Suppression (TVS), Surge &amp; Reverse Polarity Safety</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Industrial Control Systems, Smart Monitoring &amp; Automation Solutions</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> RS485, Modbus, CAN Bus &amp; Industrial Communication Protocols</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Remote Monitoring, Data Acquisition &amp; Process Control Systems</li>
             </ul>
           </div>
 
-          <!-- Service 9: Custom Electronics -->
           <div class="card-glow reveal-left" id="custom">
             <div class="card-icon-container">
               <i data-lucide="gem"></i>
             </div>
             <h3>Custom Electronics</h3>
-            <p>Tailor-made hardware modules built for unique specifications: custom sensor interfaces, power drivers, and proprietary communication bridges.</p>
+            <h4>Designed for Your Unique Requirements</h4>
+            <p>We develop custom electronic hardware tailored to your specific application, delivering reliable, high-performance solutions for industrial, commercial, and IoT products.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Specialized transducer and sensor signal conditioning</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> High-efficiency motor control &amp; power driver boards</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Bespoke telemetry nodes and localized control loops</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Custom Electronic Circuit Design &amp; Hardware Development</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Sensor Integration, Power Management &amp; Communication Interfaces</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Application-Specific Electronics, Prototype Development &amp; Product Customization</li>
             </ul>
           </div>
 
-          <!-- Service 10: Production Support -->
           <div class="card-glow reveal-right" id="production">
             <div class="card-icon-container">
               <i data-lucide="factory"></i>
             </div>
             <h3>Production Support &amp; EMS Hand-off</h3>
-            <p>We compile complete production-ready data packages, ensuring smooth transitions to high-volume contract manufacturing.</p>
+            <h4>Manufacturing-Ready Engineering</h4>
+            <p>We provide complete production support to ensure a smooth transition from prototype to mass manufacturing with optimized documentation, testing, and technical assistance.</p>
             <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.95rem;">
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Design for Manufacturability (DFM) &amp; Testing (DFT) audits</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Standard production packs (Gerber, Drill, ODB++, XY Data, BOM)</li>
-              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Direct liaison with Electronic Manufacturing Services (EMS) partners</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> DManufacturing Documentation, Gerber Files, BOM &amp; Assembly Support</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Design Verification, Functional Testing &amp; Production Readiness</li>
+              <li class="flex items-center gap-1"><i data-lucide="check" style="color: var(--accent-cyan); width: 16px;"></i> Technical Support, Production Optimization &amp; Quality Assurance</li>
             </ul>
           </div>
 
@@ -202,16 +196,14 @@
       </div>
     </section>
 
-    <!-- CALL TO ACTION -->
     <section class="section-padding" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-light);">
       <div class="container text-center reveal">
-        <h2>Have a custom engineering challenge?</h2>
-        <p style="max-width: 600px; margin: 0 auto 2rem;">Our principal system architects will review your schematic outline, draft high-level guidelines, and provide a detailed structural engineering estimate.</p>
-        <a href="contact.html" class="btn btn-primary btn-lg">Book Technical Consultation</a>
+        <h2>Have an Innovative Product Idea?</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem;">Whether you're building a new electronic product, upgrading an existing design, or need expert engineering support, our team is ready to help transform your vision into a reliable, production-ready solution.</p>
+        <a href="contact.html" class="btn btn-primary btn-lg">Let's Build Your Next Innovation Together</a>
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-grid">
