@@ -456,17 +456,17 @@ document.addEventListener('DOMContentLoaded', () => {
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
-      media_url: "/public/01.png",
+      media_url: "/public/04.png",
       caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
-      media_url: "/public/02.png",
+      media_url: "/public/05.png",
       caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
-      media_url: "/public/03.png",
+      media_url: "/public/06.png",
       caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     }
