@@ -40,7 +40,7 @@ downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=
 downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=32&h=32&q=80', resolve(publicDir, 'fevicon.png'));
 
 export default defineConfig({
-  base: process.env.BASE_URL || '/',
+  base: process.env.BASE_URL || '/website/',
   publicDir: 'public',
   server: {
     port: 3000,
