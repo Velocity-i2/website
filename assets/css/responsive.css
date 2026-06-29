@@ -107,6 +107,10 @@
     font-size: 1.6rem;
   }
 
+  .grid-5,
+  .grid-6, {
+    grid-template-columns: 4fr;
+  }
   .grid-4,
   .grid-3,
   .grid-2 {

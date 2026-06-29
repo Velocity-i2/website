@@ -404,150 +404,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentReviewIndex = 0;
   let totalReviews = 1;
+  let autoplayTimer = null;
 
-  // Integrated Accounts Fallbacks
+  // Helper to dynamically calculate initials from names
+  function getInitials(name) {
+    if (!name) return 'V';
+    // Remove special characters
+    const cleanName = name.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+    const parts = cleanName.split(/\s+/);
+    if (parts.length === 0) return 'V';
+    if (parts.length === 1) {
+      return parts[0].substring(0, 2).toUpperCase();
+    }
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  // PREDEFINED GOOGLE REVIEWS LIST
+  // Add, edit, or remove reviews here. The slideshow and navigation dots will update automatically!
   const localDemoReviews = [
     {
-      author_name: "Apurva Joshi",
-      text: "Velocity designed our multi-layer high-speed industrial IoT gateways. Their precision routing and signal analysis was flawless. We received fully functional prototypes ahead of schedule.",
-      role: "Verified Business Reviewer",
-      initials: "AJ"
+      author_name: "Kaushal Bavishiya137",
+      text: "Exceptional service and professionalism! They designed and developed our PCB and firmware perfectly.",
+      role: "Verified Business Reviewer"
     },
     {
-      author_name: "Sarah Jenkins",
-      text: "The Wireless Water Level Controller we bought for our automated facility works perfectly across 3 floors. Solid signal penetrations and incredibly stable construction.",
-      role: "Verified Business Reviewer",
-      initials: "SJ"
+      author_name: "ADHITHYAN V H",
+      text: "Velocity offers a really solid mix of services under one roof — from product development and PCB design to 3D printing and even drone solutions. Their team is hands-on and knows how to turn ideas into working systems. If you're into embedded tech, they’re definitely worth checking out.",
+      role: "Verified Business Reviewer"
     },
     {
-      author_name: "Rajesh Shah",
-      text: "Excellent engineering consulting. Their IoT thermal logger pushes real-time telemetry straight to our sheets securely. Very professional firmware execution.",
-      role: "Verified Business Reviewer",
-      initials: "RS"
+      author_name: "Aniket Vadadoriya",
+      text: "We were absolutely blown away by their deep expertise in embedded systems and the outstanding quality of their custom hardware. The team was professional, responsive, and delivered beyond our expectations.",
+      role: "Verified Business Reviewer"
     }
   ];
 
   const localDemoInstaPosts = [
     {
       media_url: "/public/01.png",
-      caption: "Custom Controller Testing #lab #embedded #velocity",
+      caption: "",
+      permalink: "https://www.instagram.com/velocityi2/"
+    },
+    {
+      media_url: "/public/02.png",
+      caption: "",
+      permalink: "https://www.instagram.com/velocityi2/"
+    },
+    {
+      media_url: "/public/03.png",
+      caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
       media_url: "/public/01.png",
-      caption: "High-speed differential routing in our multi-layer IoT gateway #altium #pcb",
+      caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
-      media_url: "/public/01.png",
-      caption: "Calibration of our Sub-GHz RF Wireless Water level controllers #rf #hardware",
+      media_url: "/public/02.png",
+      caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     },
     {
-      media_url: "/public/01.png",
-      caption: "Continuous telemetry data logger running tests live #iot #monitoring",
+      media_url: "/public/03.png",
+      caption: "",
       permalink: "https://www.instagram.com/velocityi2/"
     }
   ];
 
   // Load Feeds Controller
   function loadSocialFeeds() {
-    const gApiKey = localStorage.getItem('v_google_api_key');
-    const gPlaceId = localStorage.getItem('v_google_place_id');
-    const iToken = localStorage.getItem('v_insta_token');
+    renderReviews(localDemoReviews);
+    renderInstagramGrid(localDemoInstaPosts);
+  }
 
-    // Load Google Reviews
-    if (gApiKey && gPlaceId) {
-      loadLiveGoogleReviews(gApiKey, gPlaceId);
-    } else {
-      renderReviews(localDemoReviews);
-    }
-
-    // Load Instagram Feed
-    if (iToken) {
-      loadLiveInstagramFeed(iToken);
-    } else {
-      renderInstagramGrid(localDemoInstaPosts);
+  // Autoplay functionality for the slideshow
+  function startAutoplay() {
+    stopAutoplay();
+    if (totalReviews > 1) {
+      autoplayTimer = setInterval(() => {
+        currentReviewIndex = (currentReviewIndex + 1) % totalReviews;
+        updateSliderPosition();
+      }, 5000); // Transitions to next review every 5 seconds
     }
   }
 
-  // Google Places JS API Load and Fetch
-  function loadLiveGoogleReviews(apiKey, placeId) {
-    if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
-      // Create callback
-      window.initGoogleReviews = () => {
-        fetchGooglePlaceDetails(placeId);
-      };
-      
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleReviews`;
-      script.async = true;
-      script.defer = true;
-      document.head.appendChild(script);
-    } else {
-      fetchGooglePlaceDetails(placeId);
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
     }
   }
 
-  function fetchGooglePlaceDetails(placeId) {
-    try {
-      const dummyMapDiv = document.createElement('div');
-      const service = new google.maps.places.PlacesService(dummyMapDiv);
-      
-      service.getDetails({
-        placeId: placeId,
-        fields: ['reviews', 'rating', 'user_ratings_total']
-      }, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && place) {
-          if (place.reviews && place.reviews.length > 0) {
-            const formattedReviews = place.reviews.map(r => {
-              // Extract initials
-              const names = r.author_name.split(' ');
-              const initials = names.map(n => n[0]).join('').slice(0, 2).toUpperCase();
-              return {
-                author_name: r.author_name,
-                text: r.text,
-                role: 'Verified Google Reviewer',
-                initials: initials || 'GR'
-              };
-            });
-            renderReviews(formattedReviews);
-          } else {
-            renderReviews(localDemoReviews);
-          }
-        } else {
-          console.error('Google Places Service failed:', status);
-          renderReviews(localDemoReviews);
-        }
-      });
-    } catch (err) {
-      console.error('Error fetching Google Place details:', err);
-      renderReviews(localDemoReviews);
-    }
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
   }
 
-  // Instagram Basic Display API Feed Loading
-  async function loadLiveInstagramFeed(token) {
-    try {
-      const res = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=${token}`);
-      if (!res.ok) throw new Error('Failed to fetch from Instagram graph endpoint');
-      
-      const data = await res.json();
-      if (data && data.data && data.data.length > 0) {
-        // Map top 4 posts
-        const posts = data.data.slice(0, 4).map(item => ({
-          media_url: item.media_type === 'VIDEO' ? (item.thumbnail_url || item.media_url) : item.media_url,
-          caption: item.caption || 'Velocity Hardware Lab Update',
-          permalink: item.permalink
-        }));
-        renderInstagramGrid(posts);
-      } else {
-        renderInstagramGrid(localDemoInstaPosts);
-      }
-    } catch (err) {
-      console.error('Error loading live Instagram feed:', err);
-      renderInstagramGrid(localDemoInstaPosts);
-    }
+  // Setup hover handlers to pause autoplay when reading
+  const reviewsContainer = document.querySelector('.reviews-slider-container');
+  if (reviewsContainer) {
+    reviewsContainer.addEventListener('mouseenter', stopAutoplay);
+    reviewsContainer.addEventListener('mouseleave', startAutoplay);
   }
 
   // Render Reviews Slider
@@ -561,15 +519,29 @@ document.addEventListener('DOMContentLoaded', () => {
     reviewsList.forEach(rev => {
       const slide = document.createElement('div');
       slide.className = 'review-slide';
-      slide.style.cssText = 'min-width: 100%; flex-shrink: 0; padding-right: 1rem; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);';
+      slide.style.cssText = 'width: 100%; max-width: 100%; min-width: 100%; flex-shrink: 0; padding-right: 1.25rem; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box;';
+      
+      const initials = rev.initials || getInitials(rev.author_name);
+      // Automatically adjust font size and line height based on character length so it never overflows!
+      const charCount = rev.text.length;
+      let fontSize = '0.95rem';
+      let lineHeight = '1.6';
+      
+      if (charCount > 250) {
+        fontSize = '0.82rem';
+        lineHeight = '1.45';
+      } else if (charCount > 150) {
+        fontSize = '0.88rem';
+        lineHeight = '1.5';
+      }
       
       slide.innerHTML = `
-        <div style="font-style: italic; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; min-height: 100px;">
+        <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
           "${rev.text}"
         </div>
-        <div class="flex items-center gap-2">
-          <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan);">
-            ${rev.initials}
+        <div class="flex items-center gap-2" style="margin-top: auto; padding-top: 0.5rem; flex-shrink: 0;">
+          <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan); flex-shrink: 0;">
+            ${initials}
           </div>
           <div>
             <h4 style="font-size: 0.95rem; margin: 0; color: var(--text-primary);">${rev.author_name}</h4>
@@ -595,12 +567,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateSliderPosition();
+    startAutoplay(); // Start slideshow autoplay once rendered
   }
 
   // Go to dynamic slide
   function goToReview(index) {
     currentReviewIndex = index;
     updateSliderPosition();
+    resetAutoplay(); // Reset timer on manual selection
   }
 
   function updateSliderPosition() {
@@ -627,6 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
     prevReviewBtn.addEventListener('click', () => {
       currentReviewIndex = (currentReviewIndex - 1 + totalReviews) % totalReviews;
       updateSliderPosition();
+      resetAutoplay(); // Reset timer on manual selection
     });
   }
 
@@ -634,6 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nextReviewBtn.addEventListener('click', () => {
       currentReviewIndex = (currentReviewIndex + 1) % totalReviews;
       updateSliderPosition();
+      resetAutoplay(); // Reset timer on manual selection
     });
   }
 
