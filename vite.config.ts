@@ -37,7 +37,7 @@ function downloadFile(url: string, dest: string) {
 
 downloadFile('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&h=400&q=80', resolve(publicDir, '01.png'));
 downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&h=100&q=80', resolve(publicDir, 'logo.png'));
-downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=32&h=32&q=80', resolve(publicDir, 'fevicon.png'));
+downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=32&h=32&q=80', resolve(publicDir, 'favicon.png'));
 
 export default defineConfig({
   base: process.env.BASE_URL || '/website/',
