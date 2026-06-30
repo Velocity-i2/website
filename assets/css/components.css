@@ -178,7 +178,7 @@
   background: var(--bg-dark-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 2.25rem;
+  padding: 1.25rem;
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;

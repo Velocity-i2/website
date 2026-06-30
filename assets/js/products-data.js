@@ -8,7 +8,7 @@ export const products = [
     name: "Wi-Fi Timer - Standalone Offline",
     category: "timers",
     badge: "Automation Timers",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "A high-precision programmable timer switch with built-in Wi-Fi access point, enabling scheduling and cycles without needing any internet connection.",
     specs: {
       "Connectivity": "Standalone Wi-Fi AP (Direct Hotspot)",
@@ -21,7 +21,7 @@ export const products = [
     name: "Wi-Fi Timer - Internet Cloud Connected",
     category: "timers",
     badge: "Automation Timers",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "An internet-enabled scheduling controller synchronizing with global NTP servers, supporting remote app scheduling and smart alerts via cloud dashboard.",
     specs: {
       "Wireless Standard": "2.4GHz Wi-Fi (NTP Server Sync)",
@@ -34,7 +34,7 @@ export const products = [
     name: "Wi-Fi Cycling Timer Clock - Offline",
     category: "timers",
     badge: "Automation Timers",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "An industrial interval cycling timer for automated pulse triggers and precision looping operations, easily configured via local Wi-Fi web portal.",
     specs: {
       "Timer Modes": "Cycle, Loop, Infinite Delay, Pulse-Trigger",
@@ -47,7 +47,7 @@ export const products = [
     name: "Wi-Fi Base School Bell Timer",
     category: "timers",
     badge: "Automation Timers",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "An automated bell scheduling system with built-in holiday planner, allowing standalone schedule management for institutions and factories.",
     specs: {
       "Events Capacity": "Up to 100 ring events/day with custom durations",
@@ -60,7 +60,7 @@ export const products = [
     name: "Wireless Water Level Controller",
     category: "controllers",
     badge: "Smart Controllers",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "An intelligent automation system communicating wirelessly between ground tanks and overhead tanks across a solid 2-floor structure range.",
     specs: {
       "Wireless Tech": "Sub-GHz RF (Penetrates heavy RCC walls)",
@@ -73,7 +73,7 @@ export const products = [
     name: "IoT Base Temperature Logger",
     category: "telemetry",
     badge: "Telemetry & Data",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "A continuous thermal monitoring logger pushing real-time measurements directly to Google Sheets with automated reports and email triggers.",
     specs: {
       "Report Integration": "Direct Google Sheets logging & PDF reports generator",
@@ -86,7 +86,7 @@ export const products = [
     name: "Long Range Data Transmitter Pair",
     category: "telemetry",
     badge: "Telemetry & Data",
-    image: "/public/01.png",
+    image: "/public/p1.png",
     description: "A reliable plug-and-play transmitter pair communicating RS485 half-duplex packets wire-free over a solid 3-kilometer line-of-sight range.",
     specs: {
       "Range Coverage": "Up to 3.0 KM (Line-of-Sight, LoRa Modulation)",

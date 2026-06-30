@@ -3,8 +3,17 @@
    ========================================================================== */
 
 import { products } from './products-data.js';
+import { injectCommonFooter } from './footer.js';
+import { injectCommonNavbar } from './navbar.js';
 
+// CHANGE THIS: Paste your deployed Google Apps Script Web App URL here!
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbym_AWdjk64njJix9UZkVYWPlwevAAfaWOsz1ACge5_v23Ohq0zu7gi4uDdlQYf1ovSdw/exec';
+                          
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Inject Common Navbar & Footer
+  injectCommonNavbar();
+  injectCommonFooter();
+
   // 1. Initialize Lucide Icons
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
@@ -43,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.nav-link');
   let matched = false;
-
+  
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href && (currentPath.endsWith(href) || (currentPath === '/' && href === '/'))) {
@@ -51,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       matched = true;
     }
   });
-
+  
   // Fallback: If no match, check / default
   if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '')) {
     const homeLink = document.querySelector('.nav-link[href="/"]');
@@ -131,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(6, 182, 212, ${alpha})`;
         ctx.fill();
-
+        
         // Draw a soft outer halo
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
@@ -148,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Loop
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-
+      
       // Draw grids briefly
       ctx.strokeStyle = 'rgba(15, 23, 42, 0.03)';
       ctx.lineWidth = 1;
@@ -176,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = `rgba(29, 78, 216, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
-
+            
             // Draw clean 90 degree "electronics PCB style" path instead of straight lines sometimes
             if (i % 3 === 0) {
               const midX = (nodes[i].x + nodes[j].x) / 2;
@@ -208,32 +217,137 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm && successAlert) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
+      
       // Show an elegant sending spinner / disable button
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
       if (submitBtn) {
-        submitBtn.innerHTML = '<span class="anim-pulse-glow">Sending project specs...</span>';
+        submitBtn.innerHTML = '<span class="anim-pulse-glow">Transmitting project specs...</span>';
         submitBtn.setAttribute('disabled', 'true');
       }
 
-      // Simulate sending data to API proxy
-      setTimeout(() => {
+      const formData = new FormData(contactForm);
+      const payload = {};
+      formData.forEach((value, key) => {
+        payload[key] = value;
+      });
+      // Extract the human-readable text for dropdowns to match the website exactly
+      const serviceSelect = contactForm.querySelector('select[name="service"]');
+      if (serviceSelect && serviceSelect.selectedIndex !== -1) {
+        payload['service'] = serviceSelect.options[serviceSelect.selectedIndex].text;
+      }
+      
+      const timelineSelect = contactForm.querySelector('select[name="timeline"]');
+      if (timelineSelect && timelineSelect.selectedIndex !== -1) {
+        payload['timeline'] = timelineSelect.options[timelineSelect.selectedIndex].text;
+      }
+      
+      const budgetSelect = contactForm.querySelector('select[name="budget"]');
+      if (budgetSelect && budgetSelect.selectedIndex !== -1) {
+        payload['budget'] = budgetSelect.options[budgetSelect.selectedIndex].text;
+      }
+      // Insert submission timestamp
+      payload['timestamp'] = new Date().toISOString();
+      payload['logoUrl'] = window.location.origin + 'public/logo.png';
+
+      if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+        // Fallback demo/guidance mode for easy installation
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.removeAttribute('disabled');
+          }
+          
+          contactForm.reset();
+          successAlert.style.borderColor = 'rgba(234, 179, 8, 0.4)';
+          successAlert.innerHTML = `
+            <div class="flex" style="gap: 1rem; align-items: flex-start;">
+              <i data-lucide="help-circle" style="color: #eab308; width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
+              <div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.25rem; font-weight: 600;">Form Ready (Configuration Required)</h4>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0; line-height: 1.5;">
+                  Your contact form is completely structured! To start receiving submissions in your Google Sheet and corporate email instantly:
+                </p>
+                <ol style="color: var(--text-secondary); font-size: 0.9rem; padding-left: 1.25rem; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.4;">
+                  <li>Follow the step-by-step Apps Script guide sent by the assistant below.</li>
+                  <li>Copy your deployed Web App URL.</li>
+                  <li>Open <code>/assets/js/main.js</code> and paste it into the <code>GOOGLE_SCRIPT_URL</code> variable at the top (Line 9).</li>
+                </ol>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                  <em>This dynamic popup will disappear once the correct deployment URL is detected.</em>
+                </p>
+              </div>
+            </div>
+          `;
+          successAlert.style.display = 'block';
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+          successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 1200);
+        return;
+      }
+
+      // Real integration with Google Apps Script API (bypassing preflight via text/plain JSON post)
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Solves redirect CORS issues beautifully in Apps Script
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
         if (submitBtn) {
           submitBtn.innerHTML = originalText;
           submitBtn.removeAttribute('disabled');
         }
-
-        // Reveal success feedback
+        
+        // Reset and show beautiful enterprise success alert
         contactForm.reset();
+        successAlert.style.borderColor = 'rgba(6, 182, 212, 0.3)';
+        successAlert.innerHTML = `
+          <div class="flex" style="gap: 1rem; align-items: flex-start;">
+            <i data-lucide="check-circle" style="color: var(--accent-cyan); width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem; font-weight: 600;">Specifications Transmitted!</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0; line-height: 1.5;">
+                Your project requirements have been successfully logged to our Google Sheet and routed directly to our hardware engineering team. We are already analyzing your parameters and will get in touch within 24 hours.
+              </p>
+            </div>
+          </div>
+        `;
         successAlert.style.display = 'block';
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
         successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Hide feedback after 8 seconds
-        setTimeout(() => {
-          successAlert.style.display = 'none';
-        }, 8000);
-      }, 1500);
+      })
+      .catch(error => {
+        console.error('Form submission failed:', error);
+        if (submitBtn) {
+          submitBtn.innerHTML = originalText;
+          submitBtn.removeAttribute('disabled');
+        }
+        
+        successAlert.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+        successAlert.innerHTML = `
+          <div class="flex" style="gap: 1rem; align-items: flex-start;">
+            <i data-lucide="alert-circle" style="color: #ef4444; width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <h4 style="color: var(--text-primary); margin-bottom: 0.25rem; font-weight: 600;">Transmission Failure</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0; line-height: 1.5;">
+                An issue occurred while sending your parameters. Please check your internet connection or reach out directly to us at <strong>info.velocityi2@gmail.com</strong>.
+              </p>
+            </div>
+          </div>
+        `;
+        successAlert.style.display = 'block';
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+        successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
     });
   }
 
@@ -241,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsGrid = document.getElementById('products-dynamic-grid');
   if (productsGrid && typeof products !== 'undefined') {
     productsGrid.innerHTML = '';
-
+    
     products.forEach((product, index) => {
       const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
       const card = document.createElement('div');
@@ -250,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.display = 'block';
       card.style.opacity = '1';
       card.style.transform = 'scale(1)';
-
+      
       let specsHTML = '';
       if (product.specs) {
         specsHTML = `
@@ -267,10 +381,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const imageHTML = product.image ? `
-          <div class="product-image-container" style=" width:350px; height:350px; margin:0 auto 1.5rem; display:flex; justify-content:center; align-items:center; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-light); background:rgba(15,23,42,0.15);">
-            <img src="${product.image}" alt="${product.name}" style=" width:100%; height:100%; object-fit:contain; object-position:center center; display:block; " referrerpolicy="no-referrer">
-          </div>
-        ` : '';
+        <div class="product-image-container" style="width: 100%; height: 220px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 1.5rem; transition: all 0.3s ease; position: relative; background: rgba(15,23,42,0.15);">
+          <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" referrerPolicy="no-referrer" />
+        </div>
+      ` : '';
+
       card.innerHTML = `
         <div class="badge badge-cyan">${product.badge}</div>
         ${imageHTML}
@@ -336,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('close-modal-btn');
   const datasheetForm = document.getElementById('datasheet-request-form');
   const datasheetSuccess = document.getElementById('datasheet-success-message');
-
+  
   if (datasheetModal) {
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.request-datasheet-btn');
@@ -373,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (datasheetForm) {
       datasheetForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
+        
         const submitBtn = datasheetForm.querySelector('button[type="submit"]');
         if (submitBtn) {
           submitBtn.innerHTML = 'Generating secure link...';
@@ -395,16 +510,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 11. SOCIAL PROOF HUB (Google Reviews Profile & Instagram Account Integration)
   const instagramStatus = document.getElementById('instagram-status');
 
-  // Slider controls
-  const prevReviewBtn = document.getElementById('prev-review-btn');
-  const nextReviewBtn = document.getElementById('next-review-btn');
-  const reviewsDots = document.getElementById('reviews-dots');
-  const reviewsViewport = document.getElementById('google-reviews-viewport');
-
-  let currentReviewIndex = 0;
-  let totalReviews = 1;
-  let autoplayTimer = null;
-
   // Helper to dynamically calculate initials from names
   function getInitials(name) {
     if (!name) return 'V';
@@ -419,7 +524,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // PREDEFINED GOOGLE REVIEWS LIST
-  // Add, edit, or remove reviews here. The slideshow and navigation dots will update automatically!
   const localDemoReviews = [
     {
       author_name: "Kaushal Bavishiya137",
@@ -438,94 +542,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  const localDemoInstaPosts = [
-    {
-      media_url: "/public/01.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    },
-    {
-      media_url: "/public/02.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    },
-    {
-      media_url: "/public/03.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    },
-    {
-      media_url: "/public/04.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    },
-    {
-      media_url: "/public/05.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    },
-    {
-      media_url: "/public/06.png",
-      caption: "",
-      permalink: "https://www.instagram.com/velocityi2/"
-    }
-  ];
+  // We duplicate the reviews programmatically to ensure there are enough items for a rich infinite carousel track
+  const reviews = [...localDemoReviews, ...localDemoReviews]; 
+  const N_reviews = reviews.length; // 6
+  const reviewCloneCount = 3; // Prepend 3, Append 3
+  let currentReviewIndex = reviewCloneCount; // Starts at first real item
+  let isReviewTransitioning = false;
+  let reviewsAutoplayTimer = null;
 
-  // Load Feeds Controller
-  function loadSocialFeeds() {
-    renderReviews(localDemoReviews);
-    renderInstagramGrid(localDemoInstaPosts);
-  }
+  // Track elements
+  const reviewsTrack = document.getElementById('google-reviews-track');
+  const prevReviewBtn = document.getElementById('prev-review-btn');
+  const nextReviewBtn = document.getElementById('next-review-btn');
+  const reviewsDots = document.getElementById('reviews-dots');
+  const reviewsWrapper = document.querySelector('.reviews-carousel-wrapper');
 
-  // Autoplay functionality for the slideshow
-  function startAutoplay() {
-    stopAutoplay();
-    if (totalReviews > 1) {
-      autoplayTimer = setInterval(() => {
-        currentReviewIndex = (currentReviewIndex + 1) % totalReviews;
-        updateSliderPosition();
-      }, 5000); // Transitions to next review every 5 seconds
-    }
-  }
+  // Render Reviews Carousel
+  function renderReviewsCarousel() {
+    if (!reviewsTrack) return;
 
-  function stopAutoplay() {
-    if (autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
-    }
-  }
+    reviewsTrack.innerHTML = '';
 
-  function resetAutoplay() {
-    stopAutoplay();
-    startAutoplay();
-  }
+    // Create the slides: [clones of last 3] + [real 6 items] + [clones of first 3]
+    const startClones = reviews.slice(-reviewCloneCount);
+    const endClones = reviews.slice(0, reviewCloneCount);
+    const allSlidesData = [...startClones, ...reviews, ...endClones];
 
-  // Setup hover handlers to pause autoplay when reading
-  const reviewsContainer = document.querySelector('.reviews-slider-container');
-  if (reviewsContainer) {
-    reviewsContainer.addEventListener('mouseenter', stopAutoplay);
-    reviewsContainer.addEventListener('mouseleave', startAutoplay);
-  }
-
-  // Render Reviews Slider
-  function renderReviews(reviewsList) {
-    if (!reviewsViewport) return;
-
-    totalReviews = reviewsList.length;
-    currentReviewIndex = 0;
-
-    reviewsViewport.innerHTML = '';
-    reviewsList.forEach(rev => {
+    allSlidesData.forEach((rev, idx) => {
       const slide = document.createElement('div');
       slide.className = 'review-slide';
-      slide.style.cssText = 'width: 100%; max-width: 100%; min-width: 100%; flex-shrink: 0; padding-right: 1.25rem; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box;';
-
+      
       const initials = rev.initials || getInitials(rev.author_name);
-      // Automatically adjust font size and line height based on character length so it never overflows!
       const charCount = rev.text.length;
       let fontSize = '0.95rem';
       let lineHeight = '1.6';
-
+      
       if (charCount > 250) {
         fontSize = '0.82rem';
         lineHeight = '1.45';
@@ -535,29 +586,46 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       slide.innerHTML = `
-        <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
-          "${rev.text}"
-        </div>
-        <div class="flex items-center gap-2" style="margin-top: auto; padding-top: 0.5rem; flex-shrink: 0;">
-          <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan); flex-shrink: 0;">
-            ${initials}
+        <div class="review-card-inner">
+          <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
+            "${rev.text}"
           </div>
-          <div>
-            <h4 style="font-size: 0.95rem; margin: 0; color: var(--text-primary);">${rev.author_name}</h4>
-            <span style="font-size: 0.75rem; color: var(--text-muted);">${rev.role}</span>
+          <div class="flex items-center justify-between" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light); flex-shrink: 0; width: 100%;">
+            <div class="flex items-center gap-2">
+              <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan); flex-shrink: 0;">
+                ${initials}
+              </div>
+              <div>
+                <h4 style="font-size: 0.95rem; margin: 0; color: var(--text-primary); font-weight: 600;">${rev.author_name}</h4>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">${rev.role || 'Verified Customer'}</span>
+              </div>
+            </div>
+            <div class="flex" style="color: #fbbf24; flex-shrink: 0;">
+              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
+              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
+              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
+              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
+              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
+            </div>
           </div>
         </div>
       `;
-      reviewsViewport.appendChild(slide);
+      reviewsTrack.appendChild(slide);
     });
 
-    // Create Navigation Dots
+    // Reinitialize Lucide icons in dynamically loaded elements
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    // Render Dot Indicators (corresponds to the 3 unique original reviews)
     if (reviewsDots) {
       reviewsDots.innerHTML = '';
-      for (let i = 0; i < totalReviews; i++) {
-        const dot = document.createElement('div');
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('button');
         dot.className = `review-dot ${i === 0 ? 'bg-cyan' : 'bg-slate-700'}`;
-        dot.style.cssText = `width: ${i === 0 ? '16px' : '6px'}; height: 6px; background: ${i === 0 ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.15)'}; border-radius: 999px; cursor: pointer; transition: all 0.3s ease;`;
+        dot.style.cssText = `width: ${i === 0 ? '16px' : '6px'}; height: 6px; background: ${i === 0 ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.15)'}; border-radius: 999px; cursor: pointer; border: none; padding: 0; transition: all 0.3s ease;`;
+        dot.setAttribute('aria-label', `Go to review slide ${i + 1}`);
         dot.addEventListener('click', () => {
           goToReview(i);
         });
@@ -565,26 +633,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    updateSliderPosition();
-    startAutoplay(); // Start slideshow autoplay once rendered
+    updateReviewsPosition(false);
+    startReviewsAutoplay();
   }
 
-  // Go to dynamic slide
-  function goToReview(index) {
-    currentReviewIndex = index;
-    updateSliderPosition();
-    resetAutoplay(); // Reset timer on manual selection
-  }
+  function updateReviewsPosition(animate = true) {
+    if (!reviewsTrack) return;
+    
+    const slideElements = reviewsTrack.querySelectorAll('.review-slide');
+    if (slideElements.length === 0) return;
 
-  function updateSliderPosition() {
-    if (!reviewsViewport) return;
-    reviewsViewport.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+    const firstSlide = slideElements[0];
+    const slideWidth = firstSlide.getBoundingClientRect().width;
 
-    // Update dots style
+    if (!animate) {
+      reviewsTrack.style.transition = 'none';
+    } else {
+      reviewsTrack.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+    }
+
+    reviewsTrack.style.transform = `translateX(-${currentReviewIndex * slideWidth}px)`;
+
+    // Update dots based on the active item in localDemoReviews
     if (reviewsDots) {
+      const realActiveIndex = ((currentReviewIndex - reviewCloneCount) % 3 + 3) % 3;
       const dots = reviewsDots.children;
       for (let i = 0; i < dots.length; i++) {
-        if (i === currentReviewIndex) {
+        if (i === realActiveIndex) {
           dots[i].style.width = '16px';
           dots[i].style.background = 'var(--accent-cyan)';
         } else {
@@ -595,44 +670,202 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Click event logic for next / prev button
+  function startReviewsAutoplay() {
+    stopReviewsAutoplay();
+    reviewsAutoplayTimer = setInterval(() => {
+      nextReview();
+    }, 3000); // Auto slide every 3 seconds
+  }
+
+  function stopReviewsAutoplay() {
+    if (reviewsAutoplayTimer) {
+      clearInterval(reviewsAutoplayTimer);
+      reviewsAutoplayTimer = null;
+    }
+  }
+
+  function resetReviewsAutoplay() {
+    stopReviewsAutoplay();
+    startReviewsAutoplay();
+  }
+
+  function nextReview() {
+    if (isReviewTransitioning) return;
+    isReviewTransitioning = true;
+    currentReviewIndex++;
+    updateReviewsPosition(true);
+  }
+
+  function prevReview() {
+    if (isReviewTransitioning) return;
+    isReviewTransitioning = true;
+    currentReviewIndex--;
+    updateReviewsPosition(true);
+  }
+
+  function goToReview(realIndex) {
+    if (isReviewTransitioning) return;
+    isReviewTransitioning = true;
+    currentReviewIndex = reviewCloneCount + realIndex;
+    updateReviewsPosition(true);
+    resetReviewsAutoplay();
+  }
+
+  // Hook transitionend event to allow seamless jumps
+  if (reviewsTrack) {
+    reviewsTrack.addEventListener('transitionend', () => {
+      isReviewTransitioning = false;
+      if (currentReviewIndex >= N_reviews + reviewCloneCount) {
+        currentReviewIndex = currentReviewIndex - N_reviews;
+        updateReviewsPosition(false);
+      } else if (currentReviewIndex < reviewCloneCount) {
+        currentReviewIndex = currentReviewIndex + N_reviews;
+        updateReviewsPosition(false);
+      }
+    });
+  }
+
+  // Hook navigation buttons
   if (prevReviewBtn) {
     prevReviewBtn.addEventListener('click', () => {
-      currentReviewIndex = (currentReviewIndex - 1 + totalReviews) % totalReviews;
-      updateSliderPosition();
-      resetAutoplay(); // Reset timer on manual selection
+      prevReview();
+      resetReviewsAutoplay();
     });
   }
 
   if (nextReviewBtn) {
     nextReviewBtn.addEventListener('click', () => {
-      currentReviewIndex = (currentReviewIndex + 1) % totalReviews;
-      updateSliderPosition();
-      resetAutoplay(); // Reset timer on manual selection
+      nextReview();
+      resetReviewsAutoplay();
     });
   }
 
-  // Render Instagram Posts
-  function renderInstagramGrid(postsList) {
-    const gridContainer = document.getElementById('instagram-posts-container');
-    if (!gridContainer) return;
+  // Pause on hover
+  if (reviewsWrapper) {
+    reviewsWrapper.addEventListener('mouseenter', stopReviewsAutoplay);
+    reviewsWrapper.addEventListener('mouseleave', startReviewsAutoplay);
+  }
 
-    gridContainer.innerHTML = '';
-    postsList.forEach(post => {
-      const postCard = document.createElement('a');
-      postCard.href = post.permalink || 'https://instagram.com';
-      postCard.target = '_blank';
-      postCard.className = 'insta-post-card';
-      postCard.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); background: rgba(15,23,42,0.1); cursor: pointer; display: block;';
 
-      postCard.innerHTML = `
-        <img src="${post.media_url}" alt="Instagram post" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);" referrerPolicy="no-referrer" />
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); padding: 0.75rem; font-size: 0.75rem; color: #fff; transform: translateY(100%); opacity: 0; transition: all 0.3s ease;" class="insta-caption-overlay">
-          ${post.caption.length > 55 ? post.caption.slice(0, 52) + '...' : post.caption}
-        </div>
+  // ==========================================
+  // INSTAGRAM CAROUSEL ENGINE
+  // ==========================================
+  const demoInstagramPosts = [
+    { media_url: "/01.png", caption: "Custom Controller Testing #lab #embedded #velocity", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "High-speed differential routing in our multi-layer IoT gateway #altium #pcb", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Calibration of our Sub-GHz RF Wireless Water level controllers #rf #hardware", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Continuous telemetry data logger running tests live #iot #monitoring", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Multi-layer impedance controlled PCB stackup #hardware #engineering", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Thermal imaging analysis of active power regulators #testing #analysis", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Assembling precision SMT prototype boards in-house #prototyping #assembly", permalink: "https://www.instagram.com/velocityi2/" },
+    { media_url: "/01.png", caption: "Custom firmware flash & automated hardware test cycle #firmware #coding", permalink: "https://www.instagram.com/velocityi2/" }
+  ];
+
+  const N_insta = demoInstagramPosts.length; // 8
+  const instaCloneCount = 5; // Max visible cards is 5 on desktop, so we clone 5 to prepend & 5 to append
+  let currentInstaIndex = instaCloneCount; // Starts at first real item
+  let isInstaTransitioning = false;
+  let instaAutoplayTimer = null;
+
+  const instaTrack = document.getElementById('instagram-carousel-track');
+  const instaWrapper = document.querySelector('.instagram-carousel-wrapper');
+
+  function renderInstagramCarousel() {
+    if (!instaTrack) return;
+
+    instaTrack.innerHTML = '';
+
+    // Create slides: [clones of last 5] + [real 8 items] + [clones of first 5]
+    const startClones = demoInstagramPosts.slice(-instaCloneCount);
+    const endClones = demoInstagramPosts.slice(0, instaCloneCount);
+    const allSlidesData = [...startClones, ...demoInstagramPosts, ...endClones];
+
+    allSlidesData.forEach((post, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'insta-carousel-slide';
+
+      slide.innerHTML = `
+        <a href="${post.permalink}" target="_blank" class="insta-carousel-card">
+          <img src="${post.media_url}" alt="Instagram post" loading="lazy" referrerPolicy="no-referrer" />
+          <div class="insta-caption-overlay">
+            ${post.caption.length > 55 ? post.caption.slice(0, 52) + '...' : post.caption}
+          </div>
+        </a>
       `;
-      gridContainer.appendChild(postCard);
+      instaTrack.appendChild(slide);
     });
+
+    updateInstaPosition(false);
+    startInstaAutoplay();
+  }
+
+  function updateInstaPosition(animate = true) {
+    if (!instaTrack) return;
+
+    const slideElements = instaTrack.querySelectorAll('.insta-carousel-slide');
+    if (slideElements.length === 0) return;
+
+    const firstSlide = slideElements[0];
+    const slideWidth = firstSlide.getBoundingClientRect().width;
+
+    if (!animate) {
+      instaTrack.style.transition = 'none';
+    } else {
+      instaTrack.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+    }
+
+    instaTrack.style.transform = `translateX(-${currentInstaIndex * slideWidth}px)`;
+  }
+
+  function startInstaAutoplay() {
+    stopInstaAutoplay();
+    instaAutoplayTimer = setInterval(() => {
+      nextInstaSlide();
+    }, 2500); // Auto slide every 2.5 seconds
+  }
+
+  function stopInstaAutoplay() {
+    if (instaAutoplayTimer) {
+      clearInterval(instaAutoplayTimer);
+      instaAutoplayTimer = null;
+    }
+  }
+
+  function nextInstaSlide() {
+    if (isInstaTransitioning) return;
+    isInstaTransitioning = true;
+    currentInstaIndex++;
+    updateInstaPosition(true);
+  }
+
+  if (instaTrack) {
+    instaTrack.addEventListener('transitionend', () => {
+      isInstaTransitioning = false;
+      if (currentInstaIndex >= N_insta + instaCloneCount) {
+        currentInstaIndex = currentInstaIndex - N_insta;
+        updateInstaPosition(false);
+      } else if (currentInstaIndex < instaCloneCount) {
+        currentInstaIndex = currentInstaIndex + N_insta;
+        updateInstaPosition(false);
+      }
+    });
+  }
+
+  if (instaWrapper) {
+    instaWrapper.addEventListener('mouseenter', stopInstaAutoplay);
+    instaWrapper.addEventListener('mouseleave', startInstaAutoplay);
+  }
+
+  // Master Resize event
+  window.addEventListener('resize', () => {
+    updateReviewsPosition(false);
+    updateInstaPosition(false);
+  });
+
+  // Load Feeds Controller
+  function loadSocialFeeds() {
+    renderReviewsCarousel();
+    renderInstagramCarousel();
   }
 
   // Initialize Hub on DOMContentLoaded

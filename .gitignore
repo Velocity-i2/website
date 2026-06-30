@@ -82,3 +82,4 @@ Thumbs.db
 .env.test.local
 .env.production.local
 update.text
+google-apps-script-guide.md
