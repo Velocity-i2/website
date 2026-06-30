@@ -7,7 +7,7 @@ import { injectCommonFooter } from './footer.js';
 import { injectCommonNavbar } from './navbar.js';
 
 // CHANGE THIS: Paste your deployed Google Apps Script Web App URL here!
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbym_AWdjk64njJix9UZkVYWPlwevAAfaWOsz1ACge5_v23Ohq0zu7gi4uDdlQYf1ovSdw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjwcA1oVUODcGQVwGLGSkaI9SJa8utBPNIzXAHo7ADvaNUHxUaL9Do8wzwvFQQviI/exec';
                           
 document.addEventListener('DOMContentLoaded', () => {
   // 0. Inject Common Navbar & Footer
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Insert submission timestamp
       payload['timestamp'] = new Date().toISOString();
-      payload['logoUrl'] = window.location.origin + 'public/logo.png';
+      payload['logoUrl'] = window.location.origin + '/public/logo.png';
 
       if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
         // Fallback demo/guidance mode for easy installation
