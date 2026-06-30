@@ -8,7 +8,7 @@ import { injectCommonNavbar } from './navbar.js';
 
 // CHANGE THIS: Paste your deployed Google Apps Script Web App URL here!
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjwcA1oVUODcGQVwGLGSkaI9SJa8utBPNIzXAHo7ADvaNUHxUaL9Do8wzwvFQQviI/exec';
-                          
+
 document.addEventListener('DOMContentLoaded', () => {
   // 0. Inject Common Navbar & Footer
   injectCommonNavbar();
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.nav-link');
   let matched = false;
-  
+
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href && (currentPath.endsWith(href) || (currentPath === '/' && href === '/'))) {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       matched = true;
     }
   });
-  
+
   // Fallback: If no match, check / default
   if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '' || currentPath.endsWith('index.html'))) {
     const homeLink = document.querySelector('.nav-link[href="index.html"]');
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(6, 182, 212, ${alpha})`;
         ctx.fill();
-        
+
         // Draw a soft outer halo
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Loop
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      
+
       // Draw grids briefly
       ctx.strokeStyle = 'rgba(15, 23, 42, 0.03)';
       ctx.lineWidth = 1;
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = `rgba(29, 78, 216, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
-            
+
             // Draw clean 90 degree "electronics PCB style" path instead of straight lines sometimes
             if (i % 3 === 0) {
               const midX = (nodes[i].x + nodes[j].x) / 2;
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm && successAlert) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
+
       // Show an elegant sending spinner / disable button
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
@@ -236,12 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (serviceSelect && serviceSelect.selectedIndex !== -1) {
         payload['service'] = serviceSelect.options[serviceSelect.selectedIndex].text;
       }
-      
+
       const timelineSelect = contactForm.querySelector('select[name="timeline"]');
       if (timelineSelect && timelineSelect.selectedIndex !== -1) {
         payload['timeline'] = timelineSelect.options[timelineSelect.selectedIndex].text;
       }
-      
+
       const budgetSelect = contactForm.querySelector('select[name="budget"]');
       if (budgetSelect && budgetSelect.selectedIndex !== -1) {
         payload['budget'] = budgetSelect.options[budgetSelect.selectedIndex].text;
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = originalText;
             submitBtn.removeAttribute('disabled');
           }
-          
+
           contactForm.reset();
           successAlert.style.borderColor = 'rgba(234, 179, 8, 0.4)';
           successAlert.innerHTML = `
@@ -297,16 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(payload)
       })
-      .then(() => {
-        if (submitBtn) {
-          submitBtn.innerHTML = originalText;
-          submitBtn.removeAttribute('disabled');
-        }
-        
-        // Reset and show beautiful enterprise success alert
-        contactForm.reset();
-        successAlert.style.borderColor = 'rgba(6, 182, 212, 0.3)';
-        successAlert.innerHTML = `
+        .then(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.removeAttribute('disabled');
+          }
+
+          // Reset and show beautiful enterprise success alert
+          contactForm.reset();
+          successAlert.style.borderColor = 'rgba(6, 182, 212, 0.3)';
+          successAlert.innerHTML = `
           <div class="flex" style="gap: 1rem; align-items: flex-start;">
             <i data-lucide="check-circle" style="color: var(--accent-cyan); width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
             <div>
@@ -317,21 +317,21 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
         `;
-        successAlert.style.display = 'block';
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
-        }
-        successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      })
-      .catch(error => {
-        console.error('Form submission failed:', error);
-        if (submitBtn) {
-          submitBtn.innerHTML = originalText;
-          submitBtn.removeAttribute('disabled');
-        }
-        
-        successAlert.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-        successAlert.innerHTML = `
+          successAlert.style.display = 'block';
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+          successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(error => {
+          console.error('Form submission failed:', error);
+          if (submitBtn) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.removeAttribute('disabled');
+          }
+
+          successAlert.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+          successAlert.innerHTML = `
           <div class="flex" style="gap: 1rem; align-items: flex-start;">
             <i data-lucide="alert-circle" style="color: #ef4444; width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
             <div>
@@ -342,12 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
         `;
-        successAlert.style.display = 'block';
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
-        }
-        successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
+          successAlert.style.display = 'block';
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+          successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
     });
   }
 
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsGrid = document.getElementById('products-dynamic-grid');
   if (productsGrid && typeof products !== 'undefined') {
     productsGrid.innerHTML = '';
-    
+
     products.forEach((product, index) => {
       const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
       const card = document.createElement('div');
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.display = 'block';
       card.style.opacity = '1';
       card.style.transform = 'scale(1)';
-      
+
       let specsHTML = '';
       if (product.specs) {
         specsHTML = `
@@ -381,8 +381,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const imageHTML = product.image ? `
-        <div class="product-image-container" style="width: 100%; height: 220px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 1.5rem; transition: all 0.3s ease; position: relative; background: rgba(15,23,42,0.15);">
-          <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" referrerPolicy="no-referrer" />
+        <div class="product-image-container" style=" width:100%; max-width: 300px; height:auto; margin:0 auto 1.5rem; display:flex; justify-content:center; align-items:center; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-light); background:rgba(15,23,42,0.15);">
+          <img src="${product.image}" alt="${product.name}" style=" width:100%; height:100%; object-fit:contain; object-position:center center; display:block; " referrerpolicy="no-referrer">
         </div>
       ` : '';
 
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('close-modal-btn');
   const datasheetForm = document.getElementById('datasheet-request-form');
   const datasheetSuccess = document.getElementById('datasheet-success-message');
-  
+
   if (datasheetModal) {
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.request-datasheet-btn');
@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (datasheetForm) {
       datasheetForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const submitBtn = datasheetForm.querySelector('button[type="submit"]');
         if (submitBtn) {
           submitBtn.innerHTML = 'Generating secure link...';
@@ -542,20 +542,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  // We duplicate the reviews programmatically to ensure there are enough items for a rich infinite carousel track
-  const reviews = [...localDemoReviews, ...localDemoReviews]; 
-  const N_reviews = reviews.length; // 6
-  const reviewCloneCount = 3; // Prepend 3, Append 3
+  const reviews = localDemoReviews;
+  const N_reviews = reviews.length; // 3
+  const reviewCloneCount = 1; // Prepend 1, Append 1 for seamless single-slide loop
   let currentReviewIndex = reviewCloneCount; // Starts at first real item
   let isReviewTransitioning = false;
   let reviewsAutoplayTimer = null;
 
   // Track elements
-  const reviewsTrack = document.getElementById('google-reviews-track');
+  const reviewsTrack = document.getElementById('google-reviews-viewport');
   const prevReviewBtn = document.getElementById('prev-review-btn');
   const nextReviewBtn = document.getElementById('next-review-btn');
   const reviewsDots = document.getElementById('reviews-dots');
-  const reviewsWrapper = document.querySelector('.reviews-carousel-wrapper');
+  const reviewsWrapper = document.querySelector('.reviews-slider-container');
 
   // Render Reviews Carousel
   function renderReviewsCarousel() {
@@ -571,12 +570,12 @@ document.addEventListener('DOMContentLoaded', () => {
     allSlidesData.forEach((rev, idx) => {
       const slide = document.createElement('div');
       slide.className = 'review-slide';
-      
+
       const initials = rev.initials || getInitials(rev.author_name);
       const charCount = rev.text.length;
       let fontSize = '0.95rem';
       let lineHeight = '1.6';
-      
+
       if (charCount > 250) {
         fontSize = '0.82rem';
         lineHeight = '1.45';
@@ -586,27 +585,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       slide.innerHTML = `
-        <div class="review-card-inner">
-          <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
-            "${rev.text}"
+        <div class="review-text-container" style="line-height: ${lineHeight}; font-size: ${fontSize};">
+          "${rev.text}"
+        </div>
+        <div class="flex items-center gap-2" style="margin-top: auto; flex-shrink: 0; width: 100%;">
+          <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan); flex-shrink: 0;">
+            ${initials}
           </div>
-          <div class="flex items-center justify-between" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light); flex-shrink: 0; width: 100%;">
-            <div class="flex items-center gap-2">
-              <div style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-cyan); flex-shrink: 0;">
-                ${initials}
-              </div>
-              <div>
-                <h4 style="font-size: 0.95rem; margin: 0; color: var(--text-primary); font-weight: 600;">${rev.author_name}</h4>
-                <span style="font-size: 0.75rem; color: var(--text-muted);">${rev.role || 'Verified Customer'}</span>
-              </div>
-            </div>
-            <div class="flex" style="color: #fbbf24; flex-shrink: 0;">
-              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
-              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
-              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
-              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
-              <i data-lucide="star" style="width: 12px; height: 12px; fill: currentColor;"></i>
-            </div>
+          <div>
+            <h4 style="font-size: 0.95rem; margin: 0; color: var(--text-primary); font-weight: 600;">${rev.author_name}</h4>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">${rev.role || 'Verified Business Reviewer'}</span>
           </div>
         </div>
       `;
@@ -621,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Dot Indicators (corresponds to the 3 unique original reviews)
     if (reviewsDots) {
       reviewsDots.innerHTML = '';
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < N_reviews; i++) {
         const dot = document.createElement('button');
         dot.className = `review-dot ${i === 0 ? 'bg-cyan' : 'bg-slate-700'}`;
         dot.style.cssText = `width: ${i === 0 ? '16px' : '6px'}; height: 6px; background: ${i === 0 ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.15)'}; border-radius: 999px; cursor: pointer; border: none; padding: 0; transition: all 0.3s ease;`;
@@ -639,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateReviewsPosition(animate = true) {
     if (!reviewsTrack) return;
-    
+
     const slideElements = reviewsTrack.querySelectorAll('.review-slide');
     if (slideElements.length === 0) return;
 
@@ -656,7 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update dots based on the active item in localDemoReviews
     if (reviewsDots) {
-      const realActiveIndex = ((currentReviewIndex - reviewCloneCount) % 3 + 3) % 3;
+      const realActiveIndex = ((currentReviewIndex - reviewCloneCount) % N_reviews + N_reviews) % N_reviews;
       const dots = reviewsDots.children;
       for (let i = 0; i < dots.length; i++) {
         if (i === realActiveIndex) {
@@ -747,62 +735,96 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // ==========================================
-  // INSTAGRAM CAROUSEL ENGINE
-  // ==========================================
-  const demoInstagramPosts = [
-    { media_url: "/01.png", caption: "Custom Controller Testing #lab #embedded #velocity", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "High-speed differential routing in our multi-layer IoT gateway #altium #pcb", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Calibration of our Sub-GHz RF Wireless Water level controllers #rf #hardware", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Continuous telemetry data logger running tests live #iot #monitoring", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Multi-layer impedance controlled PCB stackup #hardware #engineering", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Thermal imaging analysis of active power regulators #testing #analysis", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Assembling precision SMT prototype boards in-house #prototyping #assembly", permalink: "https://www.instagram.com/velocityi2/" },
-    { media_url: "/01.png", caption: "Custom firmware flash & automated hardware test cycle #firmware #coding", permalink: "https://www.instagram.com/velocityi2/" }
-  ];
+  const INSTAGRAM_IMAGES = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png'];
+  const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/velocityi2/';
 
-  const N_insta = demoInstagramPosts.length; // 8
-  const instaCloneCount = 5; // Max visible cards is 5 on desktop, so we clone 5 to prepend & 5 to append
-  let currentInstaIndex = instaCloneCount; // Starts at first real item
+  const N_insta = INSTAGRAM_IMAGES.length;
+  const instaCloneCount = 1; // Prepend 1, Append 1 for seamless loop
+  let currentInstaIndex = instaCloneCount;
   let isInstaTransitioning = false;
   let instaAutoplayTimer = null;
 
-  const instaTrack = document.getElementById('instagram-carousel-track');
-  const instaWrapper = document.querySelector('.instagram-carousel-wrapper');
+  const instaTrack = document.getElementById('instagram-slider-viewport');
+  const prevInstaBtn = document.getElementById('prev-insta-btn');
+  const nextInstaBtn = document.getElementById('next-insta-btn');
+  const instaDots = document.getElementById('instagram-dots');
+  const instaWrapper = document.querySelector('.reviews-slider-container');
 
   function renderInstagramCarousel() {
     if (!instaTrack) return;
 
     instaTrack.innerHTML = '';
-
-    // Create slides: [clones of last 5] + [real 8 items] + [clones of first 5]
-    const startClones = demoInstagramPosts.slice(-instaCloneCount);
-    const endClones = demoInstagramPosts.slice(0, instaCloneCount);
-    const allSlidesData = [...startClones, ...demoInstagramPosts, ...endClones];
-
-    allSlidesData.forEach((post, idx) => {
+    if (N_insta === 1) {
+      // Single image fallback - no sliding or clones needed
       const slide = document.createElement('div');
-      slide.className = 'insta-carousel-slide';
+      slide.className = 'insta-slide';
+      let imgSrc = INSTAGRAM_IMAGES[0];
+      if (!imgSrc.startsWith('http') && !imgSrc.startsWith('/') && !imgSrc.startsWith('public/')) {
+        imgSrc = 'public/' + imgSrc;
+      }
+      slide.innerHTML = `
+        <a href="${INSTAGRAM_PROFILE_URL}" target="_blank" class="insta-slide-link">
+          <img src="${imgSrc}" alt="Instagram post" class="insta-slide-img" loading="lazy" referrerPolicy="no-referrer" />
+        </a>
+      `;
+      instaTrack.appendChild(slide);
+
+      if (prevInstaBtn) prevInstaBtn.style.display = 'none';
+      if (nextInstaBtn) nextInstaBtn.style.display = 'none';
+      if (instaDots) instaDots.style.display = 'none';
+
+      instaTrack.style.transform = 'none';
+      return;
+    }
+
+    // Show navigation buttons & dots if more than 1 image
+    if (prevInstaBtn) prevInstaBtn.style.display = 'flex';
+    if (nextInstaBtn) nextInstaBtn.style.display = 'flex';
+    if (instaDots) instaDots.style.display = 'flex';
+
+    // Create slides: [clone of last] + [real items] + [clone of first]
+    const startClones = INSTAGRAM_IMAGES.slice(-instaCloneCount);
+    const endClones = INSTAGRAM_IMAGES.slice(0, instaCloneCount);
+    const allSlidesData = [...startClones, ...INSTAGRAM_IMAGES, ...endClones];
+
+    allSlidesData.forEach((imgName, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'insta-slide';
+
+      let imgSrc = imgName;
+      if (!imgSrc.startsWith('http') && !imgSrc.startsWith('/') && !imgSrc.startsWith('public/')) {
+        imgSrc = 'public/' + imgSrc;
+      }
 
       slide.innerHTML = `
-        <a href="${post.permalink}" target="_blank" class="insta-carousel-card">
-          <img src="${post.media_url}" alt="Instagram post" loading="lazy" referrerPolicy="no-referrer" />
-          <div class="insta-caption-overlay">
-            ${post.caption.length > 55 ? post.caption.slice(0, 52) + '...' : post.caption}
-          </div>
+        <a href="${INSTAGRAM_PROFILE_URL}" target="_blank" class="insta-slide-link">
+          <img src="${imgSrc}" alt="Instagram post ${idx}" class="insta-slide-img" loading="lazy" referrerPolicy="no-referrer" />
         </a>
       `;
       instaTrack.appendChild(slide);
     });
 
+    // Render Dot Indicators
+    if (instaDots) {
+      instaDots.innerHTML = '';
+      for (let i = 0; i < N_insta; i++) {
+        const dot = document.createElement('button');
+        dot.className = `insta-dot ${i === 0 ? 'bg-cyan' : 'bg-slate-700'}`;
+        dot.style.cssText = `width: ${i === 0 ? '16px' : '6px'}; height: 6px; background: ${i === 0 ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.15)'}; border-radius: 999px; cursor: pointer; border: none; padding: 0; transition: all 0.3s ease;`;
+        dot.setAttribute('aria-label', `Go to image slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+          goToInsta(i);
+        });
+        instaDots.appendChild(dot);
+      }
+    }
     updateInstaPosition(false);
     startInstaAutoplay();
   }
+function updateInstaPosition(animate = true) {
+    if (!instaTrack || N_insta <= 1) return;
 
-  function updateInstaPosition(animate = true) {
-    if (!instaTrack) return;
-
-    const slideElements = instaTrack.querySelectorAll('.insta-carousel-slide');
+    const slideElements = instaTrack.querySelectorAll('.insta-slide');
     if (slideElements.length === 0) return;
 
     const firstSlide = slideElements[0];
@@ -811,17 +833,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!animate) {
       instaTrack.style.transition = 'none';
     } else {
-      instaTrack.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+      instaTrack.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     }
 
     instaTrack.style.transform = `translateX(-${currentInstaIndex * slideWidth}px)`;
+
+    // Update dots based on active item
+    if (instaDots) {
+      const realActiveIndex = ((currentInstaIndex - instaCloneCount) % N_insta + N_insta) % N_insta;
+      const dots = instaDots.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i === realActiveIndex) {
+          dots[i].style.width = '16px';
+          dots[i].style.background = 'var(--accent-cyan)';
+        } else {
+          dots[i].style.width = '6px';
+          dots[i].style.background = 'rgba(255,255,255,0.15)';
+        }
+      }
+    }
   }
 
   function startInstaAutoplay() {
     stopInstaAutoplay();
+    if (N_insta <= 1) return;
     instaAutoplayTimer = setInterval(() => {
       nextInstaSlide();
-    }, 2500); // Auto slide every 2.5 seconds
+    }, 3000); // Auto slide every 3 seconds
   }
 
   function stopInstaAutoplay() {
@@ -831,12 +869,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function resetInstaAutoplay() {
+    stopInstaAutoplay();
+    startInstaAutoplay();
+  }
+
   function nextInstaSlide() {
     if (isInstaTransitioning) return;
     isInstaTransitioning = true;
     currentInstaIndex++;
     updateInstaPosition(true);
   }
+
+  function prevInstaSlide() {
+    if (isInstaTransitioning) return;
+    isInstaTransitioning = true;
+    currentInstaIndex--;
+    updateInstaPosition(true);
+  }
+
+  function goToInsta(realIndex) {
+    if (isInstaTransitioning) return;
+    isInstaTransitioning = true;
+    currentInstaIndex = instaCloneCount + realIndex;
+    updateInstaPosition(true);
+    resetInstaAutoplay();
+  }
+
 
   if (instaTrack) {
     instaTrack.addEventListener('transitionend', () => {
@@ -850,7 +909,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  if (prevInstaBtn) {
+    prevInstaBtn.addEventListener('click', () => {
+      prevInstaSlide();
+      resetInstaAutoplay();
+    });
+  }
 
+  if (nextInstaBtn) {
+    nextInstaBtn.addEventListener('click', () => {
+      nextInstaSlide();
+      resetInstaAutoplay();
+    });
+  }
   if (instaWrapper) {
     instaWrapper.addEventListener('mouseenter', stopInstaAutoplay);
     instaWrapper.addEventListener('mouseleave', startInstaAutoplay);
