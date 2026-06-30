@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Fallback: If no match, check / default
-  if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '')) {
-    const homeLink = document.querySelector('.nav-link[href="/"]');
+  if (!matched && (currentPath === '/' || currentPath.endsWith('/') || currentPath === '' || currentPath.endsWith('index.html'))) {
+    const homeLink = document.querySelector('.nav-link[href="index.html"]');
     if (homeLink) homeLink.classList.add('active');
   }
 

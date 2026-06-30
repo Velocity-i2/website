@@ -10,7 +10,7 @@ export function injectCommonFooter() {
       <div class="footer-grid">
         
         <div>
-          <a href="/" class="logo-wrapper">
+          <a href="index.html" class="logo-wrapper">
             <img src="public/logo.png" alt="Velocity Logo" style="height: 44px;">
           </a>
 
