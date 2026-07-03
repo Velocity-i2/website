@@ -4,6 +4,18 @@
 
 export const products = [
   {
+    id: "drone-tele-esp32",
+    name: "Drone Telemetry Module",
+    category: "drone",
+    badge: "Drone Solutions",
+    image: "/public/teleesp32.png",
+    description: "Reliable, low-latency wireless telemetry module for real-time drone communication with GCS using the MAVLink protocol.",
+    specs: {
+      "Communication": "2.4 GHz Wi-Fi Telemetry",
+      "Protocol": "MAVLink Compatible",
+      "Range": "Up to 200 Meter (LOS)"
+    }
+  },{
     id: "wifi-timer-offline",
     name: "Wi-Fi Timer - Standalone Offline",
     category: "timers",
