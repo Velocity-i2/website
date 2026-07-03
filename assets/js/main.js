@@ -391,10 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ${imageHTML}
         <h3 style="font-size: 1.75rem; margin-top: 0.5rem;">${product.name}</h3>
         <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">${product.description}</p>
-        ${specsHTML}
-        <button class="btn btn-primary request-datasheet-btn" data-product="${product.name}">
-          Request Datasheet <i data-lucide="download" style="width: 14px;"></i>
-        </button>
+        ${specsHTML}        
       `;
       productsGrid.appendChild(card);
     });
