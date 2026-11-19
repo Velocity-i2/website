@@ -42,15 +42,6 @@ downloadFile('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=
 export default defineConfig({
   base: process.env.BASE_URL || '/website/',
   publicDir: 'public',
-  plugins: [{
-    name: 'copy-cname',
-    closeBundle() {
-      const cnamePath = resolve(__dirname, 'CNAME');
-      if (fs.existsSync(cnamePath)) {
-        fs.copyFileSync(cnamePath, resolve(__dirname, 'dist', 'CNAME'));
-      }
-    }
-  }],
   server: {
     port: 3000,
     host: true
@@ -58,7 +49,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(__dirname, '/'),
         about: resolve(__dirname, 'about.html'),
         services: resolve(__dirname, 'services.html'),
         airSensor: resolve(__dirname, 'airsensor.html'),

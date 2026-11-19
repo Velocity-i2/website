@@ -68,8 +68,8 @@ export function injectCommonFooter() {
             <div class="flex" style="gap: 0.75rem; align-items: flex-start;">
               <i data-lucide="map-pin" style="color: var(--accent-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
               <span style="font-size: 0.95rem; color: var(--text-secondary);">
-                SF/3, Shivam Complex, nr. Rajhans cinema,<br>
-                New India Colony, Nikol,<br>
+                514, Rhythm Plazza, nr. Amar Jawan Circle,
+                SP Ring Road, Nikol,
                 Ahmedabad, Gujarat - 380049, India
               </span>
             </div>
