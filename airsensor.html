@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vi2 Sensor Telemetry Dashboard</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.6.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --co2-color: #10b981;
+      --temp-color: #f59e0b;
+      --hum-color: #3b82f6;
+      --border-color: #334155;
+      --warn-color: #f59e0b;
+      --crit-color: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-settings {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-settings:hover {
+      background: #273549;
+      border-color: #475569;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #94a3b8;
+    }
+
+    .dot.connected {
+      background-color: #22c55e;
+      animation: pulse 1.5s infinite;
+    }
+
+    .dot.error {
+      background-color: #ef4444;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Live Metric Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+    }
+
+    .card.co2::before { background: var(--co2-color); }
+    .card.temp::before { background: var(--temp-color); }
+    .card.hum::before { background: var(--hum-color); }
+
+    .card.alert-warn { border-color: var(--warn-color); }
+    .card.alert-crit { border-color: var(--crit-color); }
+
+    .card-title {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .card-value {
+      font-size: 2.25rem;
+      font-weight: 700;
+    }
+
+    .card-unit {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .card-sub {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Chart Container */
+    .chart-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .chart-header h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      height: 380px;
+      width: 100%;
+    }
+
+    /* Settings Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(3px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 460px;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    .modal-footer {
+      margin-top: 22px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .save-status {
+      margin-right: auto;
+      font-size: 0.85rem;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      background: #2563eb;
+      border: none;
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .btn-save:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Vi2 Sensor — Live Environment Monitor</h1>
+      <div class="header-actions">
+        <div class="status-badge">
+          <span class="dot" id="status-dot"></span>
+          <span id="status-text">Connecting to Firebase...</span>
+        </div>
+        <button class="btn-settings" id="open-settings-btn">⚙️ Thresholds</button>
+      </div>
+    </header>
+
+    <!-- Live Readings -->
+    <div class="cards-grid">
+      <div class="card co2" id="co2-card">
+        <div class="card-title">CO₂ Concentration</div>
+        <div>
+          <span class="card-value" id="co2-val">--</span>
+          <span class="card-unit">ppm</span>
+        </div>
+        <div class="card-sub" id="co2-status">Waiting for Firebase...</div>
+      </div>
+
+      <div class="card temp" id="temp-card">
+        <div class="card-title">Temperature</div>
+        <div>
+          <span class="card-value" id="temp-val">--</span>
+          <span class="card-unit">°C</span>
+        </div>
+        <div class="card-sub" id="temp-status">Waiting for Firebase...</div>
+      </div>
+
+      <div class="card hum" id="hum-card">
+        <div class="card-title">Humidity</div>
+        <div>
+          <span class="card-value" id="hum-val">--</span>
+          <span class="card-unit">%</span>
+        </div>
+        <div class="card-sub" id="hum-status">Waiting for Firebase...</div>
+      </div>
+    </div>
+
+    <!-- Last 30 Readings Graph -->
+    <div class="chart-box">
+      <div class="chart-header">
+        <h2>Last 30 Readings (3s Interval)</h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);" id="last-updated">Last fetch: --</span>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="sensorChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Threshold Settings Modal -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Configure Alert Thresholds</h3>
+        <button class="close-btn" id="close-modal-btn">&times;</button>
+      </div>
+      <form id="thresholds-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="inp-co2Warn">CO₂ Warning (ppm)</label>
+            <input type="number" id="inp-co2Warn" required />
+          </div>
+          <div class="form-group">
+            <label for="inp-co2Crit">CO₂ Critical (ppm)</label>
+            <input type="number" id="inp-co2Crit" required />
+          </div>
+          <div class="form-group">
+            <label for="inp-tempMin">Temp Min (°C)</label>
+            <input type="number" step="0.1" id="inp-tempMin" required />
+          </div>
+          <div class="form-group">
+            <label for="inp-tempMax">Temp Max (°C)</label>
+            <input type="number" step="0.1" id="inp-tempMax" required />
+          </div>
+          <div class="form-group">
+            <label for="inp-humMin">Humidity Min (%)</label>
+            <input type="number" step="0.1" id="inp-humMin" required />
+          </div>
+          <div class="form-group">
+            <label for="inp-humMax">Humidity Max (%)</label>
+            <input type="number" step="0.1" id="inp-humMax" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <span class="save-status" id="save-status"></span>
+          <button type="button" class="btn-cancel" id="cancel-modal-btn">Cancel</button>
+          <button type="submit" class="btn-save">Save to Firebase</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // 1. FIREBASE ENDPOINTS
+    // =========================================================
+    const FIREBASE_BASE_URL = "https://air-data-fcc63-default-rtdb.firebaseio.com";
+    const MAX_READINGS = 30;
+    const FETCH_INTERVAL_MS = 3000;
+
+    let currentThresholds = {
+      co2Warning: 1200,
+      co2Critical: 1500,
+      tempMin: 18,
+      tempMax: 28,
+      humidityMin: 30,
+      humidityMax: 70
+    };
+
+    const statusDot = document.getElementById("status-dot");
+    const statusText = document.getElementById("status-text");
+
+    function setStatus(state, message) {
+      statusDot.className = "dot " + state;
+      statusText.textContent = message;
+    }
+
+    // =========================================================
+    // 2. INITIALIZE CHART.JS
+    // =========================================================
+    const ctx = document.getElementById("sensorChart").getContext("2d");
+    const sensorChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: "CO₂ (ppm)",
+            data: [],
+            borderColor: "#10b981",
+            backgroundColor: "rgba(16, 185, 129, 0.1)",
+            yAxisID: "yCo2",
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3
+          },
+          {
+            label: "Temperature (°C)",
+            data: [],
+            borderColor: "#f59e0b",
+            backgroundColor: "rgba(245, 158, 11, 0.1)",
+            yAxisID: "yTempHum",
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3
+          },
+          {
+            label: "Humidity (%)",
+            data: [],
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59, 130, 246, 0.1)",
+            yAxisID: "yTempHum",
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { labels: { color: "#f8fafc" } }
+        },
+        scales: {
+          x: {
+            ticks: { color: "#94a3b8", maxRotation: 45, minRotation: 0 },
+            grid: { color: "rgba(51, 65, 85, 0.5)" }
+          },
+          yCo2: {
+            type: "linear",
+            position: "left",
+            title: { display: true, text: "CO₂ (ppm)", color: "#10b981" },
+            ticks: { color: "#10b981" },
+            grid: { color: "rgba(51, 65, 85, 0.5)" }
+          },
+          yTempHum: {
+            type: "linear",
+            position: "right",
+            title: { display: true, text: "Temp (°C) / Humidity (%)", color: "#94a3b8" },
+            ticks: { color: "#94a3b8" },
+            grid: { drawOnChartArea: false }
+          }
+        }
+      }
+    });
+
+    // =========================================================
+    // 3. UPDATE CARDS, ALERTS & GRAPH
+    // =========================================================
+    function updateDashboard(sensor, thresholds) {
+      const now = new Date().toLocaleTimeString();
+
+      const co2 = Number(sensor.CO2);
+      const temp = Number(sensor.Temperature);
+      const hum = Number(sensor.Humidity);
+
+      document.getElementById("co2-val").textContent = co2;
+      document.getElementById("temp-val").textContent = temp.toFixed(2);
+      document.getElementById("hum-val").textContent = hum.toFixed(2);
+      document.getElementById("last-updated").textContent = `Last fetch: ${now}`;
+
+      const { co2Warning, co2Critical, tempMin, tempMax, humidityMin, humidityMax } = thresholds;
+
+      // CO2 Status
+      const co2Card = document.getElementById("co2-card");
+      const co2Status = document.getElementById("co2-status");
+      co2Card.classList.remove("alert-warn", "alert-crit");
+      if (co2 >= co2Critical) {
+        co2Card.classList.add("alert-crit");
+        co2Status.textContent = `Critical (≥ ${co2Critical} ppm)`;
+        co2Status.style.color = "#ef4444";
+      } else if (co2 >= co2Warning) {
+        co2Card.classList.add("alert-warn");
+        co2Status.textContent = `Warning (≥ ${co2Warning} ppm)`;
+        co2Status.style.color = "#f59e0b";
+      } else {
+        co2Status.textContent = `Normal (< ${co2Warning} ppm)`;
+        co2Status.style.color = "#10b981";
+      }
+
+      // Temperature Status
+      const tempCard = document.getElementById("temp-card");
+      const tempStatus = document.getElementById("temp-status");
+      tempCard.classList.remove("alert-warn");
+      if (temp > tempMax || temp < tempMin) {
+        tempCard.classList.add("alert-warn");
+        tempStatus.textContent = `Out of range (${tempMin}–${tempMax} °C)`;
+        tempStatus.style.color = "#f59e0b";
+      } else {
+        tempStatus.textContent = `Normal (${tempMin}–${tempMax} °C)`;
+        tempStatus.style.color = "#10b981";
+      }
+
+      // Humidity Status
+      const humCard = document.getElementById("hum-card");
+      const humStatus = document.getElementById("hum-status");
+      humCard.classList.remove("alert-warn");
+      if (hum > humidityMax || hum < humidityMin) {
+        humCard.classList.add("alert-warn");
+        humStatus.textContent = `Out of range (${humidityMin}–${humidityMax} %)`;
+        humStatus.style.color = "#f59e0b";
+      } else {
+        humStatus.textContent = `Normal (${humidityMin}–${humidityMax} %)`;
+        humStatus.style.color = "#10b981";
+      }
+
+      // Chart Data (Last 30 readings)
+      sensorChart.data.labels.push(now);
+      sensorChart.data.datasets[0].data.push(co2);
+      sensorChart.data.datasets[1].data.push(temp);
+      sensorChart.data.datasets[2].data.push(hum);
+
+      if (sensorChart.data.labels.length > MAX_READINGS) {
+        sensorChart.data.labels.shift();
+        sensorChart.data.datasets.forEach((dataset) => dataset.data.shift());
+      }
+
+      sensorChart.update();
+    }
+
+    // =========================================================
+    // 4. FETCH LIVE DATA EVERY 3 SECONDS
+    // =========================================================
+    async function fetchFirebaseData() {
+      try {
+        const response = await fetch(`${FIREBASE_BASE_URL}/.json`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+        if (!data || !data.Vi2_Sensor) {
+          setStatus("error", "Vi2_Sensor node not found");
+          return;
+        }
+
+        if (data.config?.thresholds) {
+          currentThresholds = { ...currentThresholds, ...data.config.thresholds };
+        }
+
+        setStatus("connected", "Connected • Vi2_Sensor");
+        updateDashboard(data.Vi2_Sensor, currentThresholds);
+      } catch (error) {
+        console.error("Firebase fetch error:", error);
+        setStatus("error", "Connection / Rules Error");
+      }
+    }
+
+    // =========================================================
+    // 5. THRESHOLD SETTINGS MODAL LOGIC
+    // =========================================================
+    const modal = document.getElementById("settings-modal");
+    const saveStatus = document.getElementById("save-status");
+
+    document.getElementById("open-settings-btn").addEventListener("click", () => {
+      document.getElementById("inp-co2Warn").value = currentThresholds.co2Warning;
+      document.getElementById("inp-co2Crit").value = currentThresholds.co2Critical;
+      document.getElementById("inp-tempMin").value = currentThresholds.tempMin;
+      document.getElementById("inp-tempMax").value = currentThresholds.tempMax;
+      document.getElementById("inp-humMin").value = currentThresholds.humidityMin;
+      document.getElementById("inp-humMax").value = currentThresholds.humidityMax;
+      saveStatus.textContent = "";
+      modal.classList.add("active");
+    });
+
+    function closeModal() {
+      modal.classList.remove("active");
+    }
+
+    document.getElementById("close-modal-btn").addEventListener("click", closeModal);
+    document.getElementById("cancel-modal-btn").addEventListener("click", closeModal);
+
+    document.getElementById("thresholds-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      saveStatus.style.color = "#94a3b8";
+      saveStatus.textContent = "Saving...";
+
+      const updatedThresholds = {
+        co2Warning: Number(document.getElementById("inp-co2Warn").value),
+        co2Critical: Number(document.getElementById("inp-co2Crit").value),
+        tempMin: Number(document.getElementById("inp-tempMin").value),
+        tempMax: Number(document.getElementById("inp-tempMax").value),
+        humidityMin: Number(document.getElementById("inp-humMin").value),
+        humidityMax: Number(document.getElementById("inp-humMax").value)
+      };
+
+      try {
+        const res = await fetch(`${FIREBASE_BASE_URL}/config/thresholds.json`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedThresholds)
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        currentThresholds = updatedThresholds;
+        saveStatus.style.color = "#10b981";
+        saveStatus.textContent = "Saved to Firebase!";
+        setTimeout(closeModal, 700);
+      } catch (err) {
+        console.error("Save error:", err);
+        saveStatus.style.color = "#ef4444";
+        saveStatus.textContent = "Failed (check write rules)";
+      }
+    });
+
+    fetchFirebaseData();
+    setInterval(fetchFirebaseData, FETCH_INTERVAL_MS);
+  </script>
+</body>
+</html>
